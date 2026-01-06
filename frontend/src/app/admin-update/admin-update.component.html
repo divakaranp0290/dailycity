@@ -1,0 +1,52 @@
+<h1>Admin – Update City Today</h1>
+
+<form (ngSubmit)="submit()">
+
+    <label>City</label>
+    <select [(ngModel)]="city" name="city">
+        <option value="chennai">Chennai</option>
+        <option value="bangalore">Bangalore</option>
+        <option value="coimbatore">Coimbatore</option>
+    </select>
+
+    <label>Date</label>
+    <input type="date" [(ngModel)]="date" name="date">
+
+    <label>
+        <input type="checkbox" [(ngModel)]="power_cut" name="power_cut">
+        Power Cut
+    </label>
+
+    <label>
+        <input type="checkbox" [(ngModel)]="water_issue" name="water_issue">
+        Water Issue
+    </label>
+
+    <label>Traffic</label>
+    <select [(ngModel)]="traffic" name="traffic">
+        <option value="clear">Clear</option>
+        <option value="moderate">Moderate</option>
+        <option value="heavy">Heavy</option>
+    </select>
+
+    <label>Petrol Price</label>
+    <input type="number" [(ngModel)]="petrol" name="petrol">
+
+    <label>Diesel Price</label>
+    <input type="number" [(ngModel)]="diesel" name="diesel">
+
+    <label>Gold 22K (₹)</label>
+    <input type="number" [(ngModel)]="gold_22k" name="gold_22k" min="0" step="0.01">
+
+    <label>Silver (₹)</label>
+    <input type="number" [(ngModel)]="silver" name="silver" min="0" step="0.01">
+
+
+    <button type="submit" [disabled]="loading">
+        {{ loading ? 'Saving...' : 'Save Today Data' }}
+    </button>
+
+</form>
+
+<p *ngIf="success">Data updated successfully</p>
+<p *ngIf="error">Error updating data</p>

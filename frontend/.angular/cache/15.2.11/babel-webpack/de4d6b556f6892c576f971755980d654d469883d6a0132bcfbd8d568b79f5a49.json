@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { CityTodayComponent } from './pages/city-today/city-today.component';\nexport const routes = [{\n  path: ':city/today',\n  component: CityTodayComponent\n}, {\n  path: '**',\n  redirectTo: 'chennai/today'\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

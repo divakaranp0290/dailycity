@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 16px;
+  background: #ffffff;
+  color: #111;
+}
+
+section {
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 1.6;
+}

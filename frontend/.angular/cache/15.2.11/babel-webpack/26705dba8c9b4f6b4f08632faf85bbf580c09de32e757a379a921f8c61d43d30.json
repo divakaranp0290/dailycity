@@ -1,0 +1,1 @@
+{"ast":null,"code":"// polyfills.ts\nimport 'zone.js';","map":{"version":3,"mappings":"AAAA;AACA,OAAO,SAAS","names":[],"sourceRoot":"","sources":["/Users/Projects/dailycity/frontend/src/polyfills.ts"],"sourcesContent":["// polyfills.ts\nimport 'zone.js';"]},"metadata":{},"sourceType":"module","externalDependencies":[]}

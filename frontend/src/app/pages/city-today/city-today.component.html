@@ -1,0 +1,42 @@
+<div *ngIf="loading">
+  <p>Loading today’s updates...</p>
+</div>
+
+<div *ngIf="error">
+  <p>Data not available for today.</p>
+</div>
+
+<div *ngIf="!loading && !error">
+
+  <!-- H1 -->
+  <h1>{{ city | titlecase }} Today – Power Cut, Traffic, Fuel Price, Gold Rate</h1>
+
+  <!-- Freshness signal -->
+  <p><small>Last updated: {{ updatedAt | date:'medium' }}</small></p>
+
+  <!-- Traffic -->
+  <section *ngIf="traffic">
+    <h2>Traffic Status in {{ city | titlecase }} Today</h2>
+    <p><strong>{{ traffic }}</strong></p>
+  </section>
+
+  <!-- Fuel -->
+  <section>
+    <h2>Petrol and Diesel Price Today</h2>
+    <ul>
+      <li>Petrol: ₹{{ petrol }}</li>
+      <li>Diesel: ₹{{ diesel }}</li>
+    </ul>
+  </section>
+
+  <!-- Gold -->
+  <section>
+    <h2>Gold and Silver Rate Today</h2>
+    <ul>
+      <li>Gold (22K): ₹{{ gold22k }}</li>
+      <li>Silver: ₹{{ silver }}</li>
+    </ul>
+  </section>
+
+</div>
+
