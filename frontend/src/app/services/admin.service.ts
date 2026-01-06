@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AdminService {
 
-  private API = 'http://localhost:3000/api/admin';
+  private API = 'https://dailycity.onrender.com/api/admin';
   private ADMIN_TOKEN = 'supersecret123'; // move to env later
 
   constructor(private http: HttpClient) {}

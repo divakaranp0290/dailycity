@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CityDataService {
 
-  private API_BASE = 'http://localhost:3000/api';
+  private API_BASE = 'https://dailycity.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
