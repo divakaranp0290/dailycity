@@ -1,3 +1,4 @@
+
 h1 {
   font-size: 28px;
   margin-bottom: 6px;
@@ -15,9 +16,4 @@ section {
 h2 {
   font-size: 20px;
   margin-bottom: 6px;
-}
-
-.error {
-  color: #c62828;
-  font-weight: 500;
 }

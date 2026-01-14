@@ -1,42 +1,57 @@
-<div *ngIf="loading">
-  <p>Loading today’s updates...</p>
-</div>
+<div class="page">
+<div class="container">
+<h1>Today in {{ city | titlecase }} – {{ date }}</h1>
 
-<div *ngIf="error">
-  <p>Data not available for today.</p>
-</div>
+<p class="subtitle">
+  Daily city updates and important information
+</p>
 
+<!-- Loading -->
+<p *ngIf="loading">Loading today’s updates…</p>
+
+<!-- Error -->
+<p *ngIf="error" class="error">
+  Unable to load today’s data. Please try again later.
+</p>
+
+<!-- Content -->
 <div *ngIf="!loading && !error">
 
-  <!-- H1 -->
-  <h1>{{ city | titlecase }} Today – Power Cut, Traffic, Fuel Price, Gold Rate</h1>
+  <section>
+    <h2>Today’s Update in {{ city | titlecase }}</h2>
 
-  <!-- Freshness signal -->
-  <p><small>Last updated: {{ updatedAt | date:'medium' }}</small></p>
+    <p *ngIf="todaySpecial; else noData">
+      {{ todaySpecial }}
+    </p>
 
-  <!-- Traffic -->
-  <section *ngIf="traffic">
-    <h2>Traffic Status in {{ city | titlecase }} Today</h2>
-    <p><strong>{{ traffic }}</strong></p>
+    <ng-template #noData>
+      <p *ngIf="!todaySpecial">
+        No major updates have been reported as of today.
+        This page is updated daily with the latest information.
+      </p>
+    </ng-template>
   </section>
 
-  <!-- Fuel -->
   <section>
-    <h2>Petrol and Diesel Price Today</h2>
-    <ul>
-      <li>Petrol: ₹{{ petrol }}</li>
-      <li>Diesel: ₹{{ diesel }}</li>
-    </ul>
+    <h2>Power Cut Status Today in {{ city | titlecase }}</h2>
+    <p>No reported power cuts as of now.</p>
   </section>
 
-  <!-- Gold -->
   <section>
-    <h2>Gold and Silver Rate Today</h2>
-    <ul>
-      <li>Gold (22K): ₹{{ gold22k }}</li>
-      <li>Silver: ₹{{ silver }}</li>
-    </ul>
+    <h2>Petrol Price Today in {{ city | titlecase }}</h2>
+    <p>Fuel prices are updated daily. Detailed rates will be available soon.</p>
+  </section>
+
+  <section>
+    <h2>Gold Rate Today in {{ city | titlecase }}</h2>
+    <p>Gold prices are updated daily based on market trends.</p>
+  </section>
+
+  <section>
+    <h2>Traffic Condition Today in {{ city | titlecase }}</h2>
+    <p>Traffic conditions are normal in most areas.</p>
   </section>
 
 </div>
-
+</div>
+</div>

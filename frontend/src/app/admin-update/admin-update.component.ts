@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 
-
 @Component({
   selector: 'app-admin-update',
   templateUrl: './admin-update.component.html',
@@ -12,22 +11,20 @@ export class AdminUpdateComponent {
   city = 'chennai';
   date = new Date().toISOString().split('T')[0];
 
-  power_cut = false;
-  water_issue = false;
-  traffic = 'moderate';
+  today_special = '';
 
-  petrol!: number;
-  diesel!: number;
-  gold_22k!: number;
-  silver!: number;
+  petrol: number | null = null;
+  diesel: number | null = null;
+  gold_22k: number | null = null;
+  silver: number | null = null;
 
+  loading = false;
   success = false;
   error = false;
-  loading = false;
 
   constructor(private adminService: AdminService) {}
 
-  submit() {
+  submit(): void {
     this.loading = true;
     this.success = false;
     this.error = false;
@@ -35,16 +32,14 @@ export class AdminUpdateComponent {
     const payload = {
       city: this.city.toLowerCase().trim(),
       date: this.date,
-      power_cut: this.power_cut,
-      water_issue: this.water_issue,
-      traffic: this.traffic,
+      today_special: this.today_special || null,
       petrol: this.petrol,
       diesel: this.diesel,
       gold_22k: this.gold_22k,
       silver: this.silver
     };
 
-    this.adminService.updateCityToday(payload).subscribe({
+    this.adminService.upsertCityToday(payload).subscribe({
       next: () => {
         this.success = true;
         this.loading = false;

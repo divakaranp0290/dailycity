@@ -4,19 +4,17 @@ import { SeoService } from '../../services/seo.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-city-today',
-  templateUrl: './city-today.component.html',
-  styleUrls: ['./city-today.component.css']
+  selector: 'app-gold-rate',
+  templateUrl: './gold-rate.component.html',
+  styleUrls: ['./gold-rate.component.css']
 })
-export class CityTodayComponent implements OnInit {
+export class GoldRateComponent implements OnInit {
 
   city!: string;
   date!: string;
 
+  gold22k: number | null = null;
   loading = true;
-  error = false;
-
-  todaySpecial: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,31 +31,31 @@ export class CityTodayComponent implements OnInit {
     });
 
     this.setSEO();
-    this.loadTodayData();
+    this.loadGoldRate();
   }
 
   setSEO(): void {
     const cityName = this.capitalize(this.city);
 
     this.seo.setSEO(
-      `Today in ${cityName} – Power Cut, Petrol Price, Gold Rate | DailyCity`,
-      `Get today’s updates in ${cityName} including power cut status, petrol price, gold rate, traffic conditions and important city updates.`
+      `Gold Rate Today in ${cityName} – 22K Price | DailyCity`,
+      `Check today’s 22K gold rate in ${cityName}. Get the latest gold price per gram with daily updates.`
     );
   }
 
-  loadTodayData(): void {
-   this.http.get<any>(`http://localhost:3000/api/today/${this.city}`)
-  .subscribe({
-    next: (res) => {
-      this.todaySpecial = res.today_special;
-      this.loading = false;
-    },
-    error: () => {
-      this.error = true;
-      this.loading = false;
-    }
-  });
-
+  loadGoldRate(): void {
+    this.http
+      .get<any>(`http://localhost:3000/api/finance/gold/${this.city}`)
+      .subscribe({
+        next: (res) => {
+          this.gold22k = res?.gold_22k ?? null;
+          this.loading = false;
+        },
+        error: () => {
+          this.gold22k = null;
+          this.loading = false;
+        }
+      });
   }
 
   capitalize(value: string): string {

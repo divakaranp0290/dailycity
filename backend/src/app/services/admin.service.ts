@@ -1,45 +1,58 @@
-import { db } from '../utils/db';
+import db from '../utils/db';
 
-export async function upsertCityToday(data: any) {
-  const {
-    city,
-    date,
-    power_cut,
-    water_issue,
-    traffic,
-    petrol,
-    diesel,
-    gold_22k,
-    silver
-  } = data;
+interface CityTodayPayload {
+  city: string;
+  date: string;
+  today_special?: string;
+  petrol?: number;
+  diesel?: number;
+  gold_22k?: number;
+  silver?: number;
+}
 
-  await db.query(
-    `
-    INSERT INTO city_daily_status
-    (city, date, power_cut, water_issue, traffic,
-     petrol, diesel, gold_22k, silver)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
-    ON CONFLICT (city, date)
-    DO UPDATE SET
-      power_cut=$3,
-      water_issue=$4,
-      traffic=$5,
-      petrol=$6,
-      diesel=$7,
-      gold_22k=$8,
-      silver=$9,
-      updated_at=NOW()
-    `,
-    [
-      city.toLowerCase().trim(),
+
+export class AdminService {
+  static async upsertCityTodayData(payload: CityTodayPayload) {
+    const {
+      city,
       date,
-      power_cut,
-      water_issue,
-      traffic,
+      today_special,
       petrol,
       diesel,
       gold_22k,
       silver
-    ]
-  );
+    } = payload;
+
+    await db.query(
+      `
+    INSERT INTO daily_today_content (
+      city,
+      date,
+      today_special,
+      petrol,
+      diesel,
+      gold_22k,
+      silver
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    ON CONFLICT (city, date)
+    DO UPDATE SET
+      today_special = EXCLUDED.today_special,
+      petrol = EXCLUDED.petrol,
+      diesel = EXCLUDED.diesel,
+      gold_22k = EXCLUDED.gold_22k,
+      silver = EXCLUDED.silver,
+      updated_at = NOW()
+    `,
+      [
+        city,
+        date,
+        today_special ?? null,
+        petrol ?? null,
+        diesel ?? null,
+        gold_22k ?? null,
+        silver ?? null
+      ]
+    );
+  }
 }

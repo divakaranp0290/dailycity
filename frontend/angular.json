@@ -16,8 +16,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
             "sourceMap": true,
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/sitemap.xml",
+              "src/robots.txt"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": []
           }
         },

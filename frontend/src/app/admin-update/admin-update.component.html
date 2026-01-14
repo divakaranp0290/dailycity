@@ -1,52 +1,46 @@
+<div class="page">
+
+<div class="container">
 <h1>Admin – Update City Today</h1>
 
-<form (ngSubmit)="submit()">
+<form (ngSubmit)="submit()" #f="ngForm">
 
-    <label>City</label>
-    <select [(ngModel)]="city" name="city">
-        <option value="chennai">Chennai</option>
-        <option value="bangalore">Bangalore</option>
-        <option value="coimbatore">Coimbatore</option>
-    </select>
+  <label>City</label>
+  <select [(ngModel)]="city" name="city" required>
+    <option value="chennai">Chennai</option>
+    <option value="bangalore">Bangalore</option>
+    <option value="coimbatore">Coimbatore</option>
+  </select>
 
-    <label>Date</label>
-    <input type="date" [(ngModel)]="date" name="date">
+  <label>Date</label>
+  <input type="date" [(ngModel)]="date" name="date" required>
 
-    <label>
-        <input type="checkbox" [(ngModel)]="power_cut" name="power_cut">
-        Power Cut
-    </label>
+  <label>Today Special</label>
+  <textarea
+    [(ngModel)]="today_special"
+    name="today_special"
+    placeholder="Short city update for today"
+  ></textarea>
 
-    <label>
-        <input type="checkbox" [(ngModel)]="water_issue" name="water_issue">
-        Water Issue
-    </label>
+  <label>Petrol Price (₹)</label>
+  <input type="number" [(ngModel)]="petrol" name="petrol" step="0.01">
 
-    <label>Traffic</label>
-    <select [(ngModel)]="traffic" name="traffic">
-        <option value="clear">Clear</option>
-        <option value="moderate">Moderate</option>
-        <option value="heavy">Heavy</option>
-    </select>
+  <label>Diesel Price (₹)</label>
+  <input type="number" [(ngModel)]="diesel" name="diesel" step="0.01">
 
-    <label>Petrol Price</label>
-    <input type="number" [(ngModel)]="petrol" name="petrol">
+  <label>Gold 22K (₹)</label>
+  <input type="number" [(ngModel)]="gold_22k" name="gold_22k" step="0.01">
 
-    <label>Diesel Price</label>
-    <input type="number" [(ngModel)]="diesel" name="diesel">
+  <label>Silver (₹)</label>
+  <input type="number" [(ngModel)]="silver" name="silver" step="0.01">
 
-    <label>Gold 22K (₹)</label>
-    <input type="number" [(ngModel)]="gold_22k" name="gold_22k" min="0" step="0.01">
-
-    <label>Silver (₹)</label>
-    <input type="number" [(ngModel)]="silver" name="silver" min="0" step="0.01">
-
-
-    <button type="submit" [disabled]="loading">
-        {{ loading ? 'Saving...' : 'Save Today Data' }}
-    </button>
+  <button type="submit" [disabled]="loading">
+    {{ loading ? 'Saving…' : 'Save / Update Today Data' }}
+  </button>
 
 </form>
 
-<p *ngIf="success">Data updated successfully</p>
-<p *ngIf="error">Error updating data</p>
+<p *ngIf="success" class="success">Data saved successfully ✔</p>
+<p *ngIf="error" class="error">Failed to save data ❌</p>
+</div>
+</div>

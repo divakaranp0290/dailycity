@@ -1,0 +1,21 @@
+.footer {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: var(--bg-light);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-links {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  color: var(--secondary);
+}
+
+.footer-copy {
+  color: var(--muted);
+}

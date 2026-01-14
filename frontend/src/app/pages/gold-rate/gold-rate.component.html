@@ -1,0 +1,40 @@
+<div class="page">
+
+<div class="container">
+<h1>Gold Rate Today in {{ city | titlecase }} – {{ date }}</h1>
+
+<p class="subtitle">
+  Latest 22K gold price and daily rate updates
+</p>
+
+<p *ngIf="loading">Loading gold rate…</p>
+
+<div *ngIf="!loading">
+
+  <section>
+    <h2>22K Gold Rate in {{ city | titlecase }} Today</h2>
+
+    <p *ngIf="gold22k !== null; else noData">
+      As of today, the 22K gold rate in {{ city | titlecase }}
+      is <strong>₹{{ gold22k }}</strong> per gram.
+    </p>
+
+    <ng-template #noData>
+      <p>
+        Gold rate information is not available at the moment.
+        Prices are updated daily based on market trends.
+      </p>
+    </ng-template>
+  </section>
+
+  <section>
+    <h2>Does Gold Rate Change Daily?</h2>
+    <p>
+      Yes, gold prices may change daily based on international markets,
+      currency fluctuations, and local demand.
+    </p>
+  </section>
+
+</div>
+</div>
+</div>

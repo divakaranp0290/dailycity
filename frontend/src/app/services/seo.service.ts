@@ -121,5 +121,16 @@ export class SeoService {
             ]
         });
     }
+
+    setSEO(titleText: string, descriptionText: string): void {
+    // Set document title
+    this.title.setTitle(titleText);
+
+    // Set / update meta description
+    this.meta.updateTag({
+      name: 'description',
+      content: descriptionText
+    });
+  }
     
 }

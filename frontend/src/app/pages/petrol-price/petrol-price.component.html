@@ -1,0 +1,49 @@
+<div class="page">
+<div class="container">
+<h1>Petrol Price Today in {{ city | titlecase }} – {{ date }}</h1>
+
+<p class="subtitle">
+  Latest petrol price updates and fuel rate information
+</p>
+
+<p *ngIf="loading">Loading petrol price…</p>
+
+<div *ngIf="!loading">
+
+  <section>
+    <h2>Petrol Price in {{ city | titlecase }} Today</h2>
+
+    <p *ngIf="petrolPrice !== null; else noData">
+      As of today, the petrol price in {{ city | titlecase }}
+      is <strong>₹{{ petrolPrice }}</strong> per litre.
+    </p>
+
+    <ng-template #noData>
+      <p>
+        Petrol price information is not available at the moment.
+        Fuel prices are updated daily and may vary by location.
+      </p>
+    </ng-template>
+  </section>
+
+  <section>
+    <h2>Does Petrol Price Change Daily?</h2>
+    <p>
+      Yes, petrol prices may change daily depending on global crude oil prices,
+      taxes, and local market conditions.
+    </p>
+  </section>
+
+  <section>
+    <h2>Is Petrol Price Same Across {{ city | titlecase }}?</h2>
+    <p>
+      Petrol prices are generally uniform across the city,
+      but minor variations may exist between fuel stations.
+    </p>
+  </section>
+
+</div>
+</div>
+</div>
+
+

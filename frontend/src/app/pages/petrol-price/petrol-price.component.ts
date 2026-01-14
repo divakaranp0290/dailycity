@@ -4,19 +4,18 @@ import { SeoService } from '../../services/seo.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-city-today',
-  templateUrl: './city-today.component.html',
-  styleUrls: ['./city-today.component.css']
+  selector: 'app-petrol-price',
+  templateUrl: './petrol-price.component.html',
+  styleUrls: ['./petrol-price.component.css']
 })
-export class CityTodayComponent implements OnInit {
+export class PetrolPriceComponent implements OnInit {
 
   city!: string;
   date!: string;
 
-  loading = true;
-  error = false;
+  petrolPrice: number | null = null;
 
-  todaySpecial: string | null = null;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,31 +32,31 @@ export class CityTodayComponent implements OnInit {
     });
 
     this.setSEO();
-    this.loadTodayData();
+    this.loadPetrolPrice();
   }
 
   setSEO(): void {
     const cityName = this.capitalize(this.city);
 
     this.seo.setSEO(
-      `Today in ${cityName} – Power Cut, Petrol Price, Gold Rate | DailyCity`,
-      `Get today’s updates in ${cityName} including power cut status, petrol price, gold rate, traffic conditions and important city updates.`
+      `Petrol Price Today in ${cityName} – Latest Fuel Rate | DailyCity`,
+      `Check today’s petrol price in ${cityName}. Get the latest fuel rates per litre with daily updates.`
     );
   }
 
-  loadTodayData(): void {
-   this.http.get<any>(`http://localhost:3000/api/today/${this.city}`)
-  .subscribe({
-    next: (res) => {
-      this.todaySpecial = res.today_special;
-      this.loading = false;
-    },
-    error: () => {
-      this.error = true;
-      this.loading = false;
-    }
-  });
-
+  loadPetrolPrice(): void {
+    this.http
+      .get<any>(`http://localhost:3000/api/finance/petrol/${this.city}`)
+      .subscribe({
+        next: (res) => {
+          this.petrolPrice = res?.petrol ?? null;
+          this.loading = false;
+        },
+        error: () => {
+          this.petrolPrice = null;
+          this.loading = false;
+        }
+      });
   }
 
   capitalize(value: string): string {

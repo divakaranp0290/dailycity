@@ -1,13 +1,25 @@
-form {
-  max-width: 400px;
-}
-
 label {
   display: block;
   margin-top: 12px;
 }
 
-input, select, button {
+input, select, textarea {
   width: 100%;
+  padding: 6px;
   margin-top: 4px;
+}
+
+button {
+  margin-top: 16px;
+  padding: 10px;
+}
+
+.success {
+  color: green;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
 }
