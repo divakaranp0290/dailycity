@@ -1,4 +1,5 @@
-import db from '../utils/db';
+import { db } from "../utils/db";
+
 
 interface CityTodayPayload {
   city: string;
