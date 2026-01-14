@@ -16,6 +16,9 @@ export class PetrolPriceComponent implements OnInit {
   petrolPrice: number | null = null;
 
   loading = true;
+  apiUrl='https://dailycity.onrender.com';
+  // For Local Development
+  // apiUrl = 'http://localhost:3000';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +49,7 @@ export class PetrolPriceComponent implements OnInit {
 
   loadPetrolPrice(): void {
     this.http
-      .get<any>(`http://localhost:3000/api/finance/petrol/${this.city}`)
+      .get<any>(`${this.apiUrl}/api/finance/petrol/${this.city}`)
       .subscribe({
         next: (res) => {
           this.petrolPrice = res?.petrol ?? null;

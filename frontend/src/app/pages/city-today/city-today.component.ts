@@ -15,6 +15,9 @@ export class CityTodayComponent implements OnInit {
 
   loading = true;
   error = false;
+  apiUrl='https://dailycity.onrender.com';
+  // For Local Development
+  // apiUrl = 'http://localhost:3000';
 
   todaySpecial: string | null = null;
 
@@ -46,7 +49,7 @@ export class CityTodayComponent implements OnInit {
   }
 
   loadTodayData(): void {
-   this.http.get<any>(`http://localhost:3000/api/today/${this.city}`)
+   this.http.get<any>(`${this.apiUrl}/api/today/${this.city}`)
   .subscribe({
     next: (res) => {
       this.todaySpecial = res.today_special;

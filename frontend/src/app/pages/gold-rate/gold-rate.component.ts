@@ -15,6 +15,9 @@ export class GoldRateComponent implements OnInit {
 
   gold22k: number | null = null;
   loading = true;
+  apiUrl='https://dailycity.onrender.com';
+  // For Local Development
+  // apiUrl = 'http://localhost:3000';
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +48,7 @@ export class GoldRateComponent implements OnInit {
 
   loadGoldRate(): void {
     this.http
-      .get<any>(`http://localhost:3000/api/finance/gold/${this.city}`)
+      .get<any>(`${this.apiUrl}/api/finance/gold/${this.city}`)
       .subscribe({
         next: (res) => {
           this.gold22k = res?.gold_22k ?? null;
