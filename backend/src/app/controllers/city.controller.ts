@@ -1,14 +1,23 @@
 import { Request, Response } from 'express';
-import { fetchCityToday } from '../services/city.service';
+import { TodayService } from '../services/today.service';
 
 export async function getCityToday(req: Request, res: Response) {
-  const city = req.params.city;
+  try {
+    const city = req.params.city.toLowerCase();
+    const today = new Date().toISOString().split('T')[0];
 
-  const data = await fetchCityToday(city);
+    const data = await TodayService.getTodayByCity(city, today);
 
-  if (!data) {
-    return res.status(404).json({ message: 'No data for today' });
+    return res.status(200).json({
+      city,
+      date: today,
+      today_special: data?.today_special ?? null
+    });
+
+  } catch (error) {
+    console.error('City Today Controller Error:', error);
+    return res.status(500).json({
+      message: 'Internal server error'
+    });
   }
-
-  res.json(data);
 }
