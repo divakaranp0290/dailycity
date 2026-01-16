@@ -49,7 +49,7 @@ export class CityTodayComponent implements OnInit {
   }
 
   loadTodayData(): void {
-   this.http.get<any>(`${this.apiUrl}/api/today/${this.city}`)
+   this.http.get<any>(`${this.apiUrl}/api/${this.city}/today`)
   .subscribe({
     next: (res) => {
       this.todaySpecial = res.today_special;
