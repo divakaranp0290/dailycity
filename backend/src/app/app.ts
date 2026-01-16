@@ -1,18 +1,27 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
 import adminRoutes from './routes/admin.routes';
-import financeRoutes from './routes/finance.routes';
-import todayRoutes from './routes/today.routes';
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // 🔥 REQUIRED FOR POST BODY
+app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/api/admin', adminRoutes);
-app.use('/api/today', todayRoutes);
-app.use('/api/finance', financeRoutes);
+app.use('/api', adminRoutes);
 
 
-export default app;
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
