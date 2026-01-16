@@ -12,6 +12,6 @@ export class CityDataService {
   constructor(private http: HttpClient) {}
 
   getCityToday(city: string): Observable<any> {
-    return this.http.get(`${this.API_BASE}/city/${city}/today`);
+    return this.http.get(`${this.API_BASE}/${city}/today`);
   }
 }

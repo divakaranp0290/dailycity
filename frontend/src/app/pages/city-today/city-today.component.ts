@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
-import { HttpClient } from '@angular/common/http';
+import { CityDataService } from '../../services/city-data.service';
 
 @Component({
   selector: 'app-city-today',
@@ -15,20 +15,17 @@ export class CityTodayComponent implements OnInit {
 
   loading = true;
   error = false;
-  apiUrl='https://dailycity.onrender.com';
-  // For Local Development
-  // apiUrl = 'http://localhost:3000';
-
   todaySpecial: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private seo: SeoService,
-    private http: HttpClient
+    private cityDataService: CityDataService
   ) {}
 
   ngOnInit(): void {
     this.city = this.route.snapshot.paramMap.get('city')!;
+
     this.date = new Date().toLocaleDateString('en-IN', {
       day: 'numeric',
       month: 'long',
@@ -49,18 +46,16 @@ export class CityTodayComponent implements OnInit {
   }
 
   loadTodayData(): void {
-   this.http.get<any>(`${this.apiUrl}/api/${this.city}/today`)
-  .subscribe({
-    next: (res) => {
-      this.todaySpecial = res.today_special;
-      this.loading = false;
-    },
-    error: () => {
-      this.error = true;
-      this.loading = false;
-    }
-  });
-
+    this.cityDataService.getCityToday(this.city).subscribe({
+      next: (res) => {
+        this.todaySpecial = res.today_special;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      }
+    });
   }
 
   capitalize(value: string): string {
