@@ -1,30 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+/* Pages */
 import { CityTodayComponent } from './pages/city-today/city-today.component';
 import { PetrolPriceComponent } from './pages/petrol-price/petrol-price.component';
 import { GoldRateComponent } from './pages/gold-rate/gold-rate.component';
-
 import { AdminUpdateComponent } from './admin-update/admin-update.component';
-import { AboutComponent } from './pages/static/about/about.component';
-import { ContactComponent } from './pages/static/contact/contact.component';
-import { PrivacyPolicyComponent } from './pages/static/privacy-policy/privacy-policy.component';
+
+
+/* Static pages (optional – add if you have them) */
+// import { AboutComponent } from './static/about/about.component';
+// import { ContactComponent } from './static/contact/contact.component';
+// import { PrivacyPolicyComponent } from './static/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
 
-  // Default redirect (home)
+  /* =========================
+     ROOT REDIRECT
+     ========================= */
   {
     path: '',
     redirectTo: 'chennai',
     pathMatch: 'full'
   },
 
+  /* =========================
+     ADMIN (MUST BE ABOVE :city)
+     ========================= */
   {
     path: 'admin/update',
     component: AdminUpdateComponent
   },
 
-  // City pages
+  /* =========================
+     CITY ROUTES
+     ========================= */
   {
     path: ':city',
     component: CityTodayComponent
@@ -38,30 +48,22 @@ const routes: Routes = [
     component: GoldRateComponent
   },
 
-  // Static pages (NO city)
-  {
-    path: 'about',
-    component: AboutComponent
-  },
-  {
-    path: 'contact',
-    component: ContactComponent
-  },
-  {
-    path: 'privacy-policy',
-    component: PrivacyPolicyComponent
-  },
-
-  // Fallback
+  /* =========================
+     FALLBACK
+     ========================= */
   {
     path: '**',
     redirectTo: 'chennai'
   }
-
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      initialNavigation: 'enabledBlocking'
+    })
+  ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
