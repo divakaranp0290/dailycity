@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
-  private API='https://dailycity.onrender.com';
+  private API='https://dailycity.onrender.com/api';
   // For Local Development
+  // apiUrl = 'http://localhost:3000';
   // private API = 'http://localhost:3000/api/admin';
-  
   private ADMIN_TOKEN = 'supersecret123'; // move to env later
 
   constructor(private http: HttpClient) {}
@@ -18,7 +18,7 @@ export class AdminService {
     });
 
     return this.http.post(
-      `${this.API}/city/update`,
+      `${this.API}/admin/update`,
       payload,
       { headers }
     );

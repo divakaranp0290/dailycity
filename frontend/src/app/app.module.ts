@@ -13,6 +13,7 @@ import { AboutComponent } from './pages/static/about/about.component';
 import { ContactComponent } from './pages/static/contact/contact.component';
 import { PrivacyPolicyComponent } from './pages/static/privacy-policy/privacy-policy.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     AboutComponent,
     PrivacyPolicyComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

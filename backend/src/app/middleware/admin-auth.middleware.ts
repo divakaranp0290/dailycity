@@ -8,8 +8,11 @@ export function adminAuth(
   const token = req.headers['x-admin-token'];
 
   if (!token || token !== process.env.ADMIN_TOKEN) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized'
+    });
   }
 
-  next();
+  next(); 
 }

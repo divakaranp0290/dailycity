@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.logo a {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+.city-select select {
+  padding: 6px 10px;
+}
+
+.nav a {
+  margin-left: 16px;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: #000;
+}

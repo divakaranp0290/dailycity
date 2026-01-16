@@ -1,0 +1,22 @@
+<header class="header">
+  <div class="logo">
+    <a [routerLink]="['/', selectedCity]">DailyCity</a>
+  </div>
+
+  <div class="city-select">
+    <select
+      [value]="selectedCity"
+      (change)="onCityChange($any($event.target).value)"
+    >
+      <option *ngFor="let city of cities" [value]="city">
+        {{ city | titlecase }}
+      </option>
+    </select>
+  </div>
+
+  <nav class="nav">
+    <a [routerLink]="['/', selectedCity]">Today</a>
+    <a [routerLink]="['/', selectedCity, 'petrol-price']">Petrol</a>
+    <a [routerLink]="['/', selectedCity, 'gold-rate']">Gold</a>
+  </nav>
+</header>
