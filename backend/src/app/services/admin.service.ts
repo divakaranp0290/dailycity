@@ -21,7 +21,7 @@ interface CityTodayPayload {
 
 
 export class AdminService {
-  static async upsertCityTodayData(data: any) {
+ static async upsertCityTodayData(data: any) {
   const sql = `
     INSERT INTO daily_today_content (
       city,
@@ -66,8 +66,8 @@ export class AdminService {
     data.date,
     data.today_special ?? null,
     data.traffic ?? null,
-    data.power_cut ?? null,
-    data.water_issue ?? null,
+    Boolean(data.power_cut),
+    Boolean(data.water_issue),
     data.sunrise ?? null,
     data.sunset ?? null,
     data.tithi ?? null,
@@ -79,7 +79,10 @@ export class AdminService {
     data.silver ?? null
   ];
 
+  console.log('🟢 ADMIN UPSERT VALUES:', values);
+
   await db.query(sql, values);
 }
+
 
 }
