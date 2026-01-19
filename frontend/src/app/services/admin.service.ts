@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 export class AdminService {
   private API='https://dailycity.onrender.com/api';
   // For Local Development
-  // apiUrl = 'http://localhost:3000';
   // private API = 'http://localhost:3000/api/admin';
   private ADMIN_TOKEN = 'supersecret123'; // move to env later
 

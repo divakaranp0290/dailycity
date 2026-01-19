@@ -21,3 +21,9 @@ h2 {
   color: #c62828;
   font-weight: 500;
 }
+
+.seo-intro p {
+  line-height: 1.7;
+  font-size: 15px;
+  color: #333;
+}

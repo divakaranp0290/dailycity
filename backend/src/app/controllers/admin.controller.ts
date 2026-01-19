@@ -48,7 +48,11 @@ export async function upsertCityToday(req: Request, res: Response) {
       yamagandam,
       today_special,
       petrol,
-      gold_22k
+      gold_22k,
+      silver,
+      power_cut,
+      water_issue,
+      traffic
     } = req.body;
 
     if (!city || !date) {
@@ -67,7 +71,11 @@ export async function upsertCityToday(req: Request, res: Response) {
       yamagandam,
       today_special,
       petrol,
-      gold_22k
+      gold_22k,
+      silver,
+      power_cut,
+      water_issue,
+      traffic
     });
 
     // 🔐 AUDIT LOG

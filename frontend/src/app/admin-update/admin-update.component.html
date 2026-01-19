@@ -7,7 +7,7 @@
     <!-- CITY -->
     <div class="form-group">
       <label>City *</label>
-      <select name="city" [(ngModel)]="city" (change)="onCityChanged($event)" required>
+      <select name="city" [(ngModel)]="city"  required>
 
         <option *ngFor="let c of cities" [value]="c">
           {{ c | titlecase }}
@@ -46,6 +46,27 @@
       <small class="error" *ngIf="petrolCtrl.invalid && petrolCtrl.touched">
         Enter a valid petrol price
       </small>
+    </div>
+
+    <div class="form-group">
+      <label>Traffic Status</label>
+      <input type="text" name="traffic" [(ngModel)]="traffic" maxlength="100" placeholder="Heavy / Moderate / Smooth" />
+    </div>
+
+    <!-- POWER CUT -->
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="power_cut" [(ngModel)]="power_cut" />
+        Power Cut Today
+      </label>
+    </div>
+
+    <!-- WATER ISSUE -->
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="water_issue" [(ngModel)]="water_issue" />
+        Water Supply Issue
+      </label>
     </div>
 
     <!-- GOLD -->

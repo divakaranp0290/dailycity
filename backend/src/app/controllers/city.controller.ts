@@ -19,7 +19,10 @@ export async function getCityToday(req: Request, res: Response) {
       sunset: data?.sunset ?? null,
       tithi: data?.tithi ?? null,
       rahu_kalam: data?.rahu_kalam ?? null,
-      yamagandam: data?.yamagandam ?? null
+      yamagandam: data?.yamagandam ?? null,
+      power_cut: data?.power_cut ?? null,
+      water_issue: data?.water_issue ?? null,
+      traffic: data?.traffic ?? null
     });
 
   } catch (error) {

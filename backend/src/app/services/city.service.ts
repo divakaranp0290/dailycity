@@ -61,7 +61,10 @@ export class CityService {
         sunset,
         tithi,
         rahu_kalam,
-        yamagandam
+        yamagandam,
+        power_cut,
+        water_issue,
+        traffic
       FROM daily_today_content
       WHERE city = $1 AND date = $2
       LIMIT 1
@@ -98,7 +101,10 @@ export class CityService {
       sunset,
       tithi,
       rahu_kalam,
-      yamagandam
+      yamagandam,
+      power_cut,
+        water_issue,
+        traffic
     FROM daily_today_content
     WHERE city = $1 AND date = $2
     LIMIT 1
@@ -155,7 +161,10 @@ static async autoCopyYesterdayToToday() {
         yamagandam,
         today_special,
         petrol,
-        gold_22k
+        gold_22k,
+        power_cut,
+        water_issue,
+        traffic
       FROM daily_today_content
       WHERE city = $1 AND date = $2
       LIMIT 1
@@ -183,9 +192,12 @@ static async autoCopyYesterdayToToday() {
         yamagandam,
         today_special,
         petrol,
-        gold_22k
+        gold_22k,
+        power_cut,
+        water_issue,
+        traffic
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
       `,
       [
         city,
