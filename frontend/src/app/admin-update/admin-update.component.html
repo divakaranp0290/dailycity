@@ -69,6 +69,17 @@
       </label>
     </div>
 
+
+    <!-- SILVER -->
+    <div class="form-group">
+      <label>Silver Rate (₹ / gram)</label>
+      <input type="number" name="silver" [(ngModel)]="silver" min="1" step="0.01" #silverCtrl="ngModel" />
+
+      <small class="error" *ngIf="silverCtrl.invalid && silverCtrl.touched">
+        Enter a valid silver rate
+      </small>
+    </div>
+
     <!-- GOLD -->
     <div class="form-group">
       <label>Gold Rate 22K (₹ / gram)</label>
