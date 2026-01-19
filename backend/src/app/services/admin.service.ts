@@ -6,7 +6,7 @@ interface CityTodayPayload {
   date: string;
   today_special?: string;
   petrol?: number;
-  diesel?: number;
+  // diesel?: number;
   gold_22k?: number;
   silver?: number;
   power_cut?: string;
@@ -27,7 +27,7 @@ export class AdminService {
       date,
       today_special,
       petrol,
-      diesel,
+      // diesel,
       gold_22k,
       silver,
       power_cut,
@@ -48,7 +48,7 @@ export class AdminService {
       date,
       today_special,
       petrol,
-      diesel,
+      // diesel,
       gold_22k,
       silver,
       power_cut,
@@ -66,12 +66,17 @@ export class AdminService {
     DO UPDATE SET
       today_special = EXCLUDED.today_special,
       petrol = EXCLUDED.petrol,
-      diesel = EXCLUDED.diesel,
+      // diesel = EXCLUDED.diesel,
       gold_22k = EXCLUDED.gold_22k,
       silver = EXCLUDED.silver,
       power_cut = EXCLUDED.power_cut,
         water_issue = EXCLUDED.water_issue,
         traffic = EXCLUDED.traffic,
+        sunrise = EXCLUDED.sunrise,
+      sunset = EXCLUDED.sunset,
+      tithi = EXCLUDED.tithi,
+      rahu_kalam = EXCLUDED.rahu_kalam,
+      yamagandam = EXCLUDED.yamagandam,
       updated_at = NOW()
     `,
       [
@@ -79,7 +84,7 @@ export class AdminService {
         date,
         today_special ?? null,
         petrol ?? null,
-        diesel ?? null,
+        // diesel ?? null,
         gold_22k ?? null,
         silver ?? null,
         power_cut ?? null,
