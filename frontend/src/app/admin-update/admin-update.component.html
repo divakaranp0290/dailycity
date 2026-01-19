@@ -48,6 +48,18 @@
       </small>
     </div>
 
+      <!-- DIESEL -->
+    <div class="form-group">
+      <label>Diesel Price (₹)</label>
+      <input type="number" name="diesel" [(ngModel)]="diesel" min="1" step="0.01" #dieselCtrl="ngModel" />
+
+      <small class="error" *ngIf="dieselCtrl.invalid && dieselCtrl.touched">
+        Enter a valid diesel price
+      </small>
+    </div>
+
+
+
     <div class="form-group">
       <label>Traffic Status</label>
       <input type="text" name="traffic" [(ngModel)]="traffic" maxlength="100" placeholder="Heavy / Moderate / Smooth" />
@@ -70,8 +82,10 @@
     </div>
 
 
+
     <!-- SILVER -->
     <div class="form-group">
+
       <label>Silver Rate (₹ / gram)</label>
       <input type="number" name="silver" [(ngModel)]="silver" min="1" step="0.01" #silverCtrl="ngModel" />
 
