@@ -21,76 +21,65 @@ interface CityTodayPayload {
 
 
 export class AdminService {
-  static async upsertCityTodayData(payload: CityTodayPayload) {
-    const {
+  static async upsertCityTodayData(data: any) {
+  const sql = `
+    INSERT INTO daily_today_content (
       city,
       date,
       today_special,
-      petrol,
-      diesel,
-      gold_22k,
-      silver,
+      traffic,
       power_cut,
       water_issue,
-      traffic,
       sunrise,
       sunset,
       tithi,
       rahu_kalam,
       yamagandam,
-      
-    } = payload;
-
-    await db.query(
-      `
-    INSERT INTO daily_today_content (
-      city,
-      date,
-      today_special,
       petrol,
       diesel,
       gold_22k,
-      silver,
-      power_cut,
-        water_issue,
-        traffic,
-         sunrise,
-      sunset,
-      tithi,
-      rahu_kalam,
-      yamagandam
-
+      silver
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+    VALUES (
+      $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15
+    )
     ON CONFLICT (city, date)
     DO UPDATE SET
       today_special = EXCLUDED.today_special,
+      traffic = EXCLUDED.traffic,
+      power_cut = EXCLUDED.power_cut,
+      water_issue = EXCLUDED.water_issue,
+      sunrise = EXCLUDED.sunrise,
+      sunset = EXCLUDED.sunset,
+      tithi = EXCLUDED.tithi,
+      rahu_kalam = EXCLUDED.rahu_kalam,
+      yamagandam = EXCLUDED.yamagandam,
       petrol = EXCLUDED.petrol,
       diesel = EXCLUDED.diesel,
       gold_22k = EXCLUDED.gold_22k,
       silver = EXCLUDED.silver,
-      power_cut = EXCLUDED.power_cut,
-        water_issue = EXCLUDED.water_issue,
-        traffic = EXCLUDED.traffic,
-      updated_at = NOW()
-    `,
-      [
-        city,
-        date,
-        today_special ?? null,
-        petrol ?? null,
-        diesel ?? null,
-        gold_22k ?? null,
-        silver ?? null,
-        power_cut ?? null,
-        water_issue ?? null,
-        traffic ?? null,
-        sunrise ?? null,
-        sunset ?? null,
-        tithi ?? null,
-        rahu_kalam ?? null,
-        yamagandam ?? null
-      ]
-    );
-  }
+      updated_at = NOW();
+  `;
+
+  const values = [
+    data.city.toLowerCase(),
+    data.date,
+    data.today_special ?? null,
+    data.traffic ?? null,
+    data.power_cut ?? null,
+    data.water_issue ?? null,
+    data.sunrise ?? null,
+    data.sunset ?? null,
+    data.tithi ?? null,
+    data.rahu_kalam ?? null,
+    data.yamagandam ?? null,
+    data.petrol ?? null,
+    data.diesel ?? null,
+    data.gold_22k ?? null,
+    data.silver ?? null
+  ];
+
+  await db.query(sql, values);
+}
+
 }
