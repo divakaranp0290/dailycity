@@ -33,6 +33,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
 
   /** 🔹 FINANCE */
   petrol: number | null = null;
+  diesel: number | null = null;
   gold_22k: number | null = null;
   silver: number | null = null;
   /** 🔹 UI STATE */
@@ -105,6 +106,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
           this.water_issue = res.water_issue ?? null;
 
           this.petrol = res.petrol ?? null;
+          this.diesel = res.diesel ?? null;
           this.gold_22k = res.gold_22k ?? null;
           this.silver = res.silver ?? null;
 
@@ -128,6 +130,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
     this.water_issue = null;
 
     this.petrol = null;
+    this.diesel = null;
     this.gold_22k = null;
     this.silver = null;
     this.sunrise = '';
@@ -150,6 +153,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
         this.silver = res.silver ?? null;
 
         this.petrol = res.petrol ?? null;
+        this.diesel = res.diesel ?? null;
         this.gold_22k = res.gold_22k ?? null;
 
         this.sunrise = res.sunrise ?? '';
@@ -182,6 +186,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
       water_issue: this.water_issue,
 
       petrol: this.petrol,
+      diesel: this.diesel,
       gold_22k: this.gold_22k,
       silver:this.silver,
 
