@@ -1,24 +1,17 @@
 import cron from 'node-cron';
-import { TodayService } from '../services/today.service';
+import { CityService } from '../services/city.service';
 
-const cities = ['chennai', 'bangalore', 'mumbai'];
+export function startDailyCron() {
 
-cron.schedule('5 0 * * *', async () => {
-  const today = new Date().toISOString().split('T')[0];
-  console.log('CRON running for', today);
+  // Runs every day at 12:05 AM
+  cron.schedule('5 0 * * *', async () => {
+    try {
+      console.log('🕛 Running daily auto-copy cron...');
+      await CityService.autoCopyYesterdayToToday();
+      console.log('✅ Daily auto-copy completed');
+    } catch (error) {
+      console.error('❌ Daily cron failed:', error);
+    }
+  });
 
-  for (const city of cities) {
-    await TodayService.upsertToday({
-      city,
-      date: today,
-      sunrise: null,
-      sunset: null,
-      tithi: null,
-      rahu_kalam: null,
-      yamagandam: null,
-      today_special: null
-    });
-  }
-}, {
-  timezone: 'Asia/Kolkata'
-});
+}

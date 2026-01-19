@@ -3,59 +3,45 @@ import { RouterModule, Routes } from '@angular/router';
 
 /* Pages */
 import { CityTodayComponent } from './pages/city-today/city-today.component';
-import { PetrolPriceComponent } from './pages/petrol-price/petrol-price.component';
-import { GoldRateComponent } from './pages/gold-rate/gold-rate.component';
 import { AdminUpdateComponent } from './admin-update/admin-update.component';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { AdminAuditComponent } from './pages/admin-audit/admin-audit.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { PublicLayoutComponent } from './layout/public-layout/public-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
-
-/* Static pages (optional – add if you have them) */
-// import { AboutComponent } from './static/about/about.component';
-// import { ContactComponent } from './static/contact/contact.component';
-// import { PrivacyPolicyComponent } from './static/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
 
-  /* =========================
-     ROOT REDIRECT
-     ========================= */
+  // PUBLIC SITE
   {
     path: '',
-    redirectTo: 'chennai',
-    pathMatch: 'full'
+    component: PublicLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'chennai', pathMatch: 'full' },
+      { path: ':city', component: CityTodayComponent },
+
+    ]
   },
 
-  /* =========================
-     ADMIN (MUST BE ABOVE :city)
-     ========================= */
+  // ADMIN
   {
-    path: 'admin/update',
-    component: AdminUpdateComponent
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AdminAuthGuard],
+    children: [
+      { path: 'update', component: AdminUpdateComponent },
+      { path: 'audit', component: AdminAuditComponent }
+    ]
   },
 
-  /* =========================
-     CITY ROUTES
-     ========================= */
-  {
-    path: ':city',
-    component: CityTodayComponent
-  },
-  {
-    path: ':city/petrol-price',
-    component: PetrolPriceComponent
-  },
-  {
-    path: ':city/gold-rate',
-    component: GoldRateComponent
-  },
+  // ADMIN LOGIN (NO HEADER)
+  { path: 'admin/login', component: AdminLoginComponent },
 
-  /* =========================
-     FALLBACK
-     ========================= */
-  {
-    path: '**',
-    redirectTo: 'chennai'
-  }
+  // FALLBACK
+  { path: '**', redirectTo: 'chennai' }
 ];
+
 
 @NgModule({
   imports: [
@@ -66,4 +52,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

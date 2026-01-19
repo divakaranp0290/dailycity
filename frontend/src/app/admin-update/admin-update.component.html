@@ -1,46 +1,111 @@
-<div class="page">
+<section class="admin-container">
 
-<div class="container">
-<h1>Admin – Update City Today</h1>
+  <h1>Admin – Update City Daily Data</h1>
 
-<form (ngSubmit)="submit()" #f="ngForm">
+  <form #adminForm="ngForm" (ngSubmit)="submit(adminForm)">
 
-  <label>City</label>
-  <select [(ngModel)]="city" name="city" required>
-    <option value="chennai">Chennai</option>
-    <option value="bangalore">Bangalore</option>
-    <option value="coimbatore">Coimbatore</option>
-  </select>
+    <!-- CITY -->
+    <div class="form-group">
+      <label>City *</label>
+      <select name="city" [(ngModel)]="city" (change)="onCityChanged($event)" required>
 
-  <label>Date</label>
-  <input type="date" [(ngModel)]="date" name="date" required>
+        <option *ngFor="let c of cities" [value]="c">
+          {{ c | titlecase }}
+        </option>
 
-  <label>Today Special</label>
-  <textarea
-    [(ngModel)]="today_special"
-    name="today_special"
-    placeholder="Short city update for today"
-  ></textarea>
+      </select>
+    </div>
 
-  <label>Petrol Price (₹)</label>
-  <input type="number" [(ngModel)]="petrol" name="petrol" step="0.01">
+    <button type="button" (click)="autoFillTodayData()">
+      Load Today’s Data
+    </button>
 
-  <label>Diesel Price (₹)</label>
-  <input type="number" [(ngModel)]="diesel" name="diesel" step="0.01">
 
-  <label>Gold 22K (₹)</label>
-  <input type="number" [(ngModel)]="gold_22k" name="gold_22k" step="0.01">
+    <!-- DATE -->
+    <div class="form-group">
+      <label>Date *</label>
+      <input type="date" name="date" [(ngModel)]="date" required #dateCtrl="ngModel" />
 
-  <label>Silver (₹)</label>
-  <input type="number" [(ngModel)]="silver" name="silver" step="0.01">
+      <small class="error" *ngIf="dateCtrl.invalid && dateCtrl.touched">
+        Date is required
+      </small>
+    </div>
 
-  <button type="submit" [disabled]="loading">
-    {{ loading ? 'Saving…' : 'Save / Update Today Data' }}
-  </button>
+    <!-- TODAY SPECIAL -->
+    <div class="form-group">
+      <label>Today Special</label>
+      <textarea name="today_special" [(ngModel)]="today_special" maxlength="500" rows="3"></textarea>
+      <small>Max 500 characters</small>
+    </div>
 
-</form>
+    <!-- PETROL -->
+    <div class="form-group">
+      <label>Petrol Price (₹)</label>
+      <input type="number" name="petrol" [(ngModel)]="petrol" min="1" step="0.01" #petrolCtrl="ngModel" />
 
-<p *ngIf="success" class="success">Data saved successfully ✔</p>
-<p *ngIf="error" class="error">Failed to save data ❌</p>
-</div>
-</div>
+      <small class="error" *ngIf="petrolCtrl.invalid && petrolCtrl.touched">
+        Enter a valid petrol price
+      </small>
+    </div>
+
+    <!-- GOLD -->
+    <div class="form-group">
+      <label>Gold Rate 22K (₹ / gram)</label>
+      <input type="number" name="gold_22k" [(ngModel)]="gold_22k" min="1" step="0.01" #goldCtrl="ngModel" />
+
+      <small class="error" *ngIf="goldCtrl.invalid && goldCtrl.touched">
+        Enter a valid gold rate
+      </small>
+    </div>
+
+    <!-- SUNRISE -->
+    <div class="form-group">
+      <label>Sunrise</label>
+      <input type="text" name="sunrise" [(ngModel)]="sunrise" maxlength="10" placeholder="06:32 AM" />
+    </div>
+
+    <!-- SUNSET -->
+    <div class="form-group">
+      <label>Sunset</label>
+      <input type="text" name="sunset" [(ngModel)]="sunset" maxlength="10" placeholder="06:01 PM" />
+    </div>
+
+    <!-- TITHI -->
+    <div class="form-group">
+      <label>Tithi</label>
+      <input type="text" name="tithi" [(ngModel)]="tithi" maxlength="50" />
+    </div>
+
+    <!-- RAHU KALAM -->
+    <div class="form-group">
+      <label>Rahu Kalam</label>
+      <input type="text" name="rahu_kalam" [(ngModel)]="rahu_kalam" maxlength="20" placeholder="01:30 PM – 03:00 PM" />
+    </div>
+
+    <!-- YAMAGANDAM -->
+    <div class="form-group">
+      <label>Yamagandam</label>
+      <input type="text" name="yamagandam" [(ngModel)]="yamagandam" maxlength="20" placeholder="09:00 AM – 10:30 AM" />
+    </div>
+
+    <button type="button" (click)="copyYesterday()" class="secondary-btn">
+      Copy Yesterday’s Data
+    </button>
+
+    <!-- SUBMIT -->
+    <button type="submit" [disabled]="adminForm.invalid || loading">
+      {{ loading ? 'Saving…' : 'Save Data' }}
+    </button>
+
+
+  </form>
+
+  <p *ngIf="success" class="success-msg">
+    City data updated successfully.
+  </p>
+
+  <p *ngIf="error" class="error-msg">
+    Failed to update city data.
+  </p>
+
+</section>

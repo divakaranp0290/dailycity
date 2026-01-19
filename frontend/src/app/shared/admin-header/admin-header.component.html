@@ -1,0 +1,20 @@
+<header class="admin-header">
+
+  <div class="left">
+    <strong>DailyCity Admin</strong>
+  </div>
+
+  <div class="center">
+    <label>City:</label>
+    <select [(ngModel)]="selectedCity" (change)="onCityChange()">
+      <option *ngFor="let c of cities" [value]="c">
+        {{ c | titlecase }}
+      </option>
+    </select>
+  </div>
+
+  <div class="right">
+    <button (click)="logout()">Logout</button>
+  </div>
+
+</header>

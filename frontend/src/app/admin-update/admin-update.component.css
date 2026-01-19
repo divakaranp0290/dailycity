@@ -1,25 +1,59 @@
-label {
-  display: block;
-  margin-top: 12px;
+.admin-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
 }
 
-input, select, textarea {
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input, textarea {
   width: 100%;
   padding: 6px;
-  margin-top: 4px;
 }
 
 button {
-  margin-top: 16px;
+  margin-top: 12px;
   padding: 10px;
 }
 
-.success {
+.success-msg {
   color: green;
-  margin-top: 10px;
+}
+
+.error-msg {
+  color: red;
 }
 
 .error {
   color: red;
-  margin-top: 10px;
+  font-size: 12px;
 }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+select {
+  width: 100%;
+  padding: 6px;
+}
+
+.secondary-btn {
+  background: #eee;
+  margin-right: 8px;
+}
+
