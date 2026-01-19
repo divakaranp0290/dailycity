@@ -11,32 +11,28 @@ import { Subscription } from 'rxjs';
 })
 export class AdminUpdateComponent implements OnInit, OnDestroy {
 
-  /** 🔹 CITY LIST */
   cities: string[] = [];
   private sub!: Subscription;
 
   city = 'chennai';
   date = new Date().toISOString().split('T')[0];
 
-  /** 🔹 CITY CONTENT */
   today_special = '';
   traffic: string | null = null;
   power_cut: boolean | null = null;
   water_issue: boolean | null = null;
 
-  /** 🔹 PANCHANG */
   sunrise = '';
   sunset = '';
   tithi = '';
   rahu_kalam = '';
   yamagandam = '';
 
-  /** 🔹 FINANCE */
   petrol: number | null = null;
   diesel: number | null = null;
   gold_22k: number | null = null;
   silver: number | null = null;
-  /** 🔹 UI STATE */
+
   loading = false;
   success = false;
   error = false;
@@ -64,11 +60,8 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  /** 🔹 Load cities for dropdown */
   loadCities(): void {
-    const headers = new HttpHeaders({
-      'x-admin-token': this.ADMIN_TOKEN
-    });
+    const headers = new HttpHeaders({ 'x-admin-token': this.ADMIN_TOKEN });
 
     this.http.get<string[]>(`${this.API}/admin/cities`, { headers })
       .subscribe({
@@ -79,56 +72,40 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
             this.autoFillTodayData();
           }
         },
-        error: () => {
-          this.cities = [];
-        }
+        error: () => this.cities = []
       });
   }
 
-  /** 🔹 Copy yesterday’s data */
   copyYesterday(): void {
-    const headers = new HttpHeaders({
-      'x-admin-token': this.ADMIN_TOKEN
-    });
+    const headers = new HttpHeaders({ 'x-admin-token': this.ADMIN_TOKEN });
 
-    this.http
-      .get<any>(`${this.API}/admin/copy-yesterday/${this.city}`, { headers })
-      .subscribe({
-        next: (res) => {
-          if (!res) {
-            alert('No data found for yesterday');
-            return;
-          }
+    this.http.get<any>(`${this.API}/admin/copy-yesterday/${this.city}`, { headers })
+      .subscribe(res => {
+        if (!res) return alert('No data found');
 
-          this.today_special = res.today_special ?? '';
-          this.traffic = res.traffic ?? null;
-          this.power_cut = res.power_cut ?? null;
-          this.water_issue = res.water_issue ?? null;
-
-          this.petrol = res.petrol ?? null;
-          this.diesel = res.diesel ?? null;
-          this.gold_22k = res.gold_22k ?? null;
-          this.silver = res.silver ?? null;
-
-          this.sunrise = res.sunrise ?? '';
-          this.sunset = res.sunset ?? '';
-          this.tithi = res.tithi ?? '';
-          this.rahu_kalam = res.rahu_kalam ?? '';
-          this.yamagandam = res.yamagandam ?? '';
-        },
-        error: () => {
-          alert('Failed to copy yesterday data');
-        }
+        Object.assign(this, {
+          today_special: res.today_special ?? '',
+          traffic: res.traffic ?? null,
+          power_cut: res.power_cut ?? null,
+          water_issue: res.water_issue ?? null,
+          petrol: res.petrol ?? null,
+          diesel: res.diesel ?? null,
+          gold_22k: res.gold_22k ?? null,
+          silver: res.silver ?? null,
+          sunrise: res.sunrise ?? '',
+          sunset: res.sunset ?? '',
+          tithi: res.tithi ?? '',
+          rahu_kalam: res.rahu_kalam ?? '',
+          yamagandam: res.yamagandam ?? ''
+        });
       });
   }
 
-  /** 🔹 Clear old values */
   resetFormFields(): void {
     this.today_special = '';
     this.traffic = null;
     this.power_cut = null;
     this.water_issue = null;
-
     this.petrol = null;
     this.diesel = null;
     this.gold_22k = null;
@@ -140,35 +117,14 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
     this.yamagandam = '';
   }
 
-  /** 🔹 Fetch today’s data */
   autoFillTodayData(): void {
-    this.http.get<any>(`${this.API}/${this.city}/today`).subscribe({
-      next: (res) => {
+    this.http.get<any>(`${this.API}/${this.city}/today`)
+      .subscribe(res => {
         if (!res) return;
-
-        this.today_special = res.today_special ?? '';
-        this.traffic = res.traffic ?? null;
-        this.power_cut = res.power_cut ?? null;
-        this.water_issue = res.water_issue ?? null;
-        this.silver = res.silver ?? null;
-
-        this.petrol = res.petrol ?? null;
-        this.diesel = res.diesel ?? null;
-        this.gold_22k = res.gold_22k ?? null;
-
-        this.sunrise = res.sunrise ?? '';
-        this.sunset = res.sunset ?? '';
-        this.tithi = res.tithi ?? '';
-        this.rahu_kalam = res.rahu_kalam ?? '';
-        this.yamagandam = res.yamagandam ?? '';
-      },
-      error: () => {
-        // silent fail (SEO-safe)
-      }
-    });
+        Object.assign(this, res);
+      });
   }
 
-  /** 🔹 Submit admin update */
   submit(form: any): void {
     if (form.invalid) return;
 
@@ -179,17 +135,14 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
     const payload = {
       city: this.city,
       date: this.date,
-
       today_special: this.today_special || null,
       traffic: this.traffic,
       power_cut: this.power_cut,
       water_issue: this.water_issue,
-
       petrol: this.petrol,
       diesel: this.diesel,
       gold_22k: this.gold_22k,
-      silver:this.silver,
-
+      silver: this.silver,
       sunrise: this.sunrise || null,
       sunset: this.sunset || null,
       tithi: this.tithi || null,
@@ -197,9 +150,7 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
       yamagandam: this.yamagandam || null
     };
 
-    const headers = new HttpHeaders({
-      'x-admin-token': this.ADMIN_TOKEN
-    });
+    const headers = new HttpHeaders({ 'x-admin-token': this.ADMIN_TOKEN });
 
     this.http.post(`${this.API}/admin/update`, payload, { headers })
       .subscribe({
