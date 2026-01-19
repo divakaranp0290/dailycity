@@ -125,45 +125,40 @@ export class AdminUpdateComponent implements OnInit, OnDestroy {
       });
   }
 
-  submit(form: any): void {
-    if (form.invalid) return;
+ submit(form: any): void {
+  if (form.invalid) return;
 
-    this.loading = true;
-    this.success = false;
-    this.error = false;
+  const payload = {
+    city: this.city,
+    date: this.date,
+    today_special: this.today_special || null,
+    traffic: this.traffic,
+    power_cut: this.power_cut,
+    water_issue: this.water_issue,
 
-    const payload = {
-      city: this.city,
-      date: this.date,
-      today_special: this.today_special || null,
-      traffic: this.traffic,
-      power_cut: this.power_cut,
-      water_issue: this.water_issue,
-      petrol: this.petrol,
-      diesel: this.diesel,
-      gold_22k: this.gold_22k,
-      silver: this.silver,
-      sunrise: this.sunrise || null,
-      sunset: this.sunset || null,
-      tithi: this.tithi || null,
-      rahu_kalam: this.rahu_kalam || null,
-      yamagandam: this.yamagandam || null
-    };
+    petrol: this.petrol !== null ? Number(this.petrol) : null,
+    diesel: this.diesel !== null ? Number(this.diesel) : null,
+    gold_22k: this.gold_22k !== null ? Number(this.gold_22k) : null,
+    silver: this.silver !== null ? Number(this.silver) : null,
 
-    const headers = new HttpHeaders({ 'x-admin-token': this.ADMIN_TOKEN });
+    sunrise: this.sunrise || null,
+    sunset: this.sunset || null,
+    tithi: this.tithi || null,
+    rahu_kalam: this.rahu_kalam || null,
+    yamagandam: this.yamagandam || null
+  };
 
-    this.http.post(`${this.API}/admin/update`, payload, { headers })
-      .subscribe({
-        next: () => {
-          this.success = true;
-          this.loading = false;
-        },
-        error: () => {
-          this.error = true;
-          this.loading = false;
-        }
-      });
-  }
+  const headers = new HttpHeaders({
+    'x-admin-token': this.ADMIN_TOKEN
+  });
+
+  this.http.post(`${this.API}/admin/update`, payload, { headers })
+    .subscribe({
+      next: () => this.success = true,
+      error: () => this.error = true
+    });
+}
+
 
   logout(): void {
     this.adminAuth.logout();

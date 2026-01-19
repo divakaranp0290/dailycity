@@ -2,9 +2,9 @@ import { db } from '../utils/db';
 
 export class CityService {
 
-  /* =========================================================
-     ADMIN UPSERT (used by admin panel)
-     ========================================================= */
+  /* =====================================================
+     ADMIN UPSERT (USED BY ADMIN PANEL)
+     ===================================================== */
   static async upsertToday(data: any) {
     const sql = `
       INSERT INTO daily_today_content (
@@ -58,19 +58,24 @@ export class CityService {
       data.tithi ?? null,
       data.rahu_kalam ?? null,
       data.yamagandam ?? null,
-      data.petrol ?? null,
-      data.diesel ?? null,
-      data.gold_22k ?? null,
-      data.silver ?? null
+      data.petrol !== null ? Number(data.petrol) : null,
+      data.diesel !== null ? Number(data.diesel) : null,
+      data.gold_22k !== null ? Number(data.gold_22k) : null,
+      data.silver !== null ? Number(data.silver) : null
     ];
+
+    // 🔍 TEMP DEBUG (remove later)
+    values.forEach((v, i) => {
+      console.log(`$${i + 1}`, v, typeof v);
+    });
 
     const result = await db.query(sql, values);
     return result.rows[0];
   }
 
-  /* =========================================================
-     PUBLIC API – Get today data (SEO-safe)
-     ========================================================= */
+  /* =====================================================
+     PUBLIC API
+     ===================================================== */
   static async getTodayByCity(city: string, date: string) {
     const result = await db.query(
       `
@@ -85,26 +90,19 @@ export class CityService {
     return result.rows[0] || null;
   }
 
-  /* =========================================================
-     GET ALL CITIES
-     ========================================================= */
   static async getAllCities(): Promise<string[]> {
     const result = await db.query(`
       SELECT DISTINCT city
       FROM daily_today_content
       ORDER BY city ASC
     `);
-
     return result.rows.map(r => r.city);
   }
 
-  /* =========================================================
-     GET YESTERDAY DATA (for admin copy button)
-     ========================================================= */
   static async getYesterdayByCity(city: string) {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const date = yesterday.toISOString().split('T')[0];
+    const y = new Date();
+    y.setDate(y.getDate() - 1);
+    const date = y.toISOString().split('T')[0];
 
     const result = await db.query(
       `
@@ -119,97 +117,60 @@ export class CityService {
     return result.rows[0] || null;
   }
 
-  /* =========================================================
-     AUTO COPY YESTERDAY → TODAY (CRON / MANUAL CALL)
-     ========================================================= */
+  /* =====================================================
+     AUTO COPY YESTERDAY → TODAY
+     ===================================================== */
   static async autoCopyYesterdayToToday() {
     const today = new Date().toISOString().split('T')[0];
-
     const y = new Date();
     y.setDate(y.getDate() - 1);
     const yesterday = y.toISOString().split('T')[0];
 
-    // Cities that had data yesterday
-    const citiesResult = await db.query(
-      `
-      SELECT DISTINCT city
-      FROM daily_today_content
-      WHERE date = $1
-      `,
+    const cities = await db.query(
+      `SELECT DISTINCT city FROM daily_today_content WHERE date = $1`,
       [yesterday]
     );
 
-    for (const row of citiesResult.rows) {
-      const city = row.city;
-
-      // Skip if today already exists
+    for (const { city } of cities.rows) {
       const exists = await db.query(
-        `
-        SELECT 1
-        FROM daily_today_content
-        WHERE city = $1 AND date = $2
-        LIMIT 1
-        `,
+        `SELECT 1 FROM daily_today_content WHERE city = $1 AND date = $2`,
         [city, today]
       );
+      if (exists.rows.length) continue;
 
-      if (exists.rows.length > 0) continue;
-
-      // Fetch yesterday’s data
-      const yesterdayData = await db.query(
-        `
-        SELECT *
-        FROM daily_today_content
-        WHERE city = $1 AND date = $2
-        LIMIT 1
-        `,
+      const yd = await db.query(
+        `SELECT * FROM daily_today_content WHERE city = $1 AND date = $2 LIMIT 1`,
         [city, yesterday]
       );
+      if (!yd.rows.length) continue;
 
-      if (!yesterdayData.rows.length) continue;
+      const d = yd.rows[0];
 
-      const d = yesterdayData.rows[0];
-
-      // Insert today (NO CONFLICT, clean insert)
       await db.query(
         `
         INSERT INTO daily_today_content (
-          city,
-          date,
-          today_special,
-          traffic,
-          power_cut,
-          water_issue,
-          sunrise,
-          sunset,
-          tithi,
-          rahu_kalam,
-          yamagandam,
-          petrol,
-          diesel,
-          gold_22k,
-          silver
+          city,date,today_special,traffic,power_cut,water_issue,
+          sunrise,sunset,tithi,rahu_kalam,yamagandam,
+          petrol,diesel,gold_22k,silver
         )
-        VALUES (
-          $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15
-        )
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
         `,
         [
           city,
           today,
           d.today_special ?? null,
           d.traffic ?? null,
-          d.power_cut === null ? null : d.power_cut,
-          d.water_issue === null ? null : d.water_issue,
+          d.power_cut ?? null,
+          d.water_issue ?? null,
           d.sunrise ?? null,
           d.sunset ?? null,
           d.tithi ?? null,
           d.rahu_kalam ?? null,
           d.yamagandam ?? null,
-          d.petrol ?? null,
-          d.diesel ?? null,
-          d.gold_22k ?? null,
-          d.silver ?? null
+          d.petrol !== null ? Number(d.petrol) : null,
+          d.diesel !== null ? Number(d.diesel) : null,
+          d.gold_22k !== null ? Number(d.gold_22k) : null,
+          d.silver !== null ? Number(d.silver) : null
         ]
       );
     }
