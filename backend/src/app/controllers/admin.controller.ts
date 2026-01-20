@@ -48,7 +48,7 @@ export async function upsertCityToday(req: Request, res: Response) {
       ...req.body,
       city: city.toLowerCase().trim()
     };
-
+    console.log('REQ BODY:', req.body);
     const result = await CityService.upsertToday(payload);
 
     // 🔍 Audit log
