@@ -25,6 +25,8 @@ export class AdminService {
       )
       ON CONFLICT (city, date)
       DO UPDATE SET
+        city = EXCLUDED.city,
+        date = EXCLUDED.date,
         today_special = EXCLUDED.today_special,
         traffic = EXCLUDED.traffic,
         power_cut = EXCLUDED.power_cut,
