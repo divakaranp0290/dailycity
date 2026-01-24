@@ -1,0 +1,71 @@
+<section class="home-wrapper">
+
+  <!-- MAIN CONTENT -->
+  <main class="home-main">
+
+    <h1>Petrol Price Today in {{ cityDisplay }}</h1>
+
+    <p class="intro">
+      Find today’s petrol and diesel prices in {{ cityDisplay }}.
+      Fuel rates are revised daily based on government updates.
+    </p>
+
+    <div *ngIf="loading">Loading fuel prices…</div>
+    <div *ngIf="error">Unable to load fuel prices.</div>
+
+    <div *ngIf="!loading && !error" class="price-box">
+      <p><strong>Petrol:</strong> ₹{{ petrol || '-' }} / litre</p>
+      <p><strong>Diesel:</strong> ₹{{ diesel || '-' }} / litre</p>
+      <p class="updated">Last updated: {{ lastUpdated }}</p>
+    </div>
+
+    <!-- INTERNAL LINK -->
+    <p class="context-link">
+      For complete city updates including traffic and power cut alerts,
+      visit <a [routerLink]="['/', city + '-today']">{{ cityDisplay }} Today</a>.
+    </p>
+
+    <!-- FAQ SECTION -->
+    <section class="article-block faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>What is today’s petrol price in {{ cityDisplay }}?</h3>
+        <p>
+          Petrol price in {{ cityDisplay }} is revised daily based on international
+          crude oil prices, currency exchange rates and government fuel pricing policies.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is today’s diesel price in {{ cityDisplay }}?</h3>
+        <p>
+          Diesel prices in {{ cityDisplay }} are updated every day and may vary
+          slightly due to local taxes and transportation costs.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why do petrol and diesel prices change every day?</h3>
+        <p>
+          Fuel prices change daily due to fluctuations in global crude oil prices,
+          currency movements and government taxation policies.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Is petrol price same across all cities in India?</h3>
+        <p>
+          Petrol prices differ across cities because state taxes and local levies vary.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside>
+    <app-sidebar [city]="city"></app-sidebar>
+  </aside>
+
+</section>

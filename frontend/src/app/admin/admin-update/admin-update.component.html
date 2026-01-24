@@ -1,0 +1,146 @@
+<section class="admin-container">
+
+  <header class="admin-header">
+    <h1>Update City Daily Data</h1>
+    <p class="subtitle">Manage daily information for selected city</p>
+  </header>
+
+  <form #adminForm="ngForm" (ngSubmit)="submit(adminForm)">
+
+    <!-- CITY -->
+    <div class="form-group">
+      <label>City *</label>
+      <select name="city" [(ngModel)]="city" required>
+        <option *ngFor="let c of cities" [value]="c">
+          {{ c | titlecase }}
+        </option>
+      </select>
+    </div>
+
+    <div class="button-row">
+      <button type="button" class="secondary-btn" (click)="autoFillTodayData()">
+        Load Today’s Data
+      </button>
+      <button type="button" class="secondary-btn" (click)="copyYesterday()">
+        Copy Yesterday
+      </button>
+    </div>
+
+    <!-- DATE -->
+    <div class="form-group">
+      <label>Date *</label>
+      <input type="date" name="date" [(ngModel)]="date" required #dateCtrl="ngModel" />
+      <small class="error" *ngIf="dateCtrl.invalid && dateCtrl.touched">
+        Date is required
+      </small>
+    </div>
+
+    <!-- TODAY SPECIAL -->
+    <div class="form-group">
+      <label>Today Special</label>
+      <textarea
+        name="today_special"
+        [(ngModel)]="today_special"
+        rows="3"
+        maxlength="500"
+        placeholder="Important updates, events, notices…">
+      </textarea>
+      <small class="hint">Max 500 characters</small>
+    </div>
+
+    <hr />
+
+    <!-- PRICES -->
+    <div class="section-title">Fuel & Metal Prices</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Petrol (₹)</label>
+        <input type="number" name="petrol" [(ngModel)]="petrol" step="0.01" />
+      </div>
+
+      <div class="form-group">
+        <label>Diesel (₹)</label>
+        <input type="number" name="diesel" [(ngModel)]="diesel" step="0.01" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Silver (₹ / g)</label>
+        <input type="number" name="silver" [(ngModel)]="silver" step="0.01" />
+      </div>
+
+      <div class="form-group">
+        <label>Gold 22K (₹ / g)</label>
+        <input type="number" name="gold_22k" [(ngModel)]="gold_22k" step="0.01" />
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- UTILITIES -->
+    <div class="section-title">Utilities & Status</div>
+
+    <div class="form-group">
+      <label>Traffic Status</label>
+      <input type="text" name="traffic" [(ngModel)]="traffic" placeholder="Heavy / Moderate / Smooth" />
+    </div>
+
+    <div class="checkbox-row">
+      <label>
+        <input type="checkbox" name="power_cut" [(ngModel)]="power_cut" />
+        Power Cut Today
+      </label>
+
+      <label>
+        <input type="checkbox" name="water_issue" [(ngModel)]="water_issue" />
+        Water Supply Issue
+      </label>
+    </div>
+
+    <hr />
+
+    <!-- CALENDAR -->
+    <div class="section-title">Calendar & Panchangam</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Sunrise</label>
+        <input type="text" name="sunrise" [(ngModel)]="sunrise" placeholder="06:32 AM" />
+      </div>
+
+      <div class="form-group">
+        <label>Sunset</label>
+        <input type="text" name="sunset" [(ngModel)]="sunset" placeholder="06:01 PM" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tithi</label>
+      <input type="text" name="tithi" [(ngModel)]="tithi" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Rahu Kalam</label>
+        <input type="text" name="rahu_kalam" [(ngModel)]="rahu_kalam" />
+      </div>
+
+      <div class="form-group">
+        <label>Yamagandam</label>
+        <input type="text" name="yamagandam" [(ngModel)]="yamagandam" />
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <button type="submit" class="primary-btn" [disabled]="adminForm.invalid || loading">
+      {{ loading ? 'Saving…' : 'Save Data' }}
+    </button>
+
+  </form>
+
+  <p *ngIf="success" class="success-msg">City data updated successfully.</p>
+  <p *ngIf="error" class="error-msg">Failed to update city data.</p>
+
+</section>

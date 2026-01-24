@@ -1,0 +1,76 @@
+<section class="home-wrapper">
+
+  <!-- MAIN CONTENT -->
+  <main class="home-main">
+
+    <h1>Gold Rate Today in {{ cityDisplay }}</h1>
+
+    <p class="intro">
+      Check the latest gold rate today in {{ cityDisplay }}.
+      This page provides updated 22K gold price per gram along with silver rates
+      to help you make informed decisions.
+    </p>
+
+    <!-- PRICE BOX -->
+    <div *ngIf="loading">Loading gold prices…</div>
+    <div *ngIf="error">Unable to load gold prices.</div>
+
+    <div *ngIf="!loading && !error" class="price-box">
+      <p><strong>22K Gold:</strong> ₹{{ gold22k || '-' }} / gram</p>
+      <p><strong>Silver:</strong> ₹{{ silver || '-' }} / gram</p>
+      <p class="updated">Last updated: {{ lastUpdated }}</p>
+    </div>
+
+    <!-- CONTEXTUAL LINK -->
+    <p class="context-link">
+      For daily traffic, power cut and fuel updates, visit
+      <a [routerLink]="['/', city + '-today']">{{ cityDisplay }} Today</a>.
+    </p>
+
+    <!-- FAQ SECTION -->
+    <section class="article-block faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <!-- GOLD FAQ -->
+      <div class="faq-item">
+        <h3>What is today’s gold rate in {{ cityDisplay }}?</h3>
+        <p>
+          Gold rates in {{ cityDisplay }} are updated daily based on international
+          market trends, currency exchange rates and local demand.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Is gold price same across all cities?</h3>
+        <p>
+          Gold prices may vary slightly between cities due to differences in
+          local taxes, transportation and jeweller margins.
+        </p>
+      </div>
+
+      <!-- SILVER FAQ -->
+      <div class="faq-item">
+        <h3>What is today’s silver rate in {{ cityDisplay }}?</h3>
+        <p>
+          Silver prices in {{ cityDisplay }} are updated daily based on market
+          demand, industrial usage and global silver prices.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does silver price change daily?</h3>
+        <p>
+          Yes, silver prices change daily depending on global market movements,
+          industrial demand and currency fluctuations.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside>
+    <app-sidebar [city]="city"></app-sidebar>
+  </aside>
+
+</section>

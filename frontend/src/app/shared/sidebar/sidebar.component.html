@@ -1,0 +1,57 @@
+<!-- ===============================
+       SIDEBAR (30%) – NORMAL SCROLL
+  ================================ -->
+<aside class="news-sidebar">
+
+  <div class="sidebar-card">
+    <h3>What you’ll find</h3>
+    <ul>
+      <li>🚦 Daily traffic updates</li>
+      <li>⛽ Petrol & diesel prices</li>
+      <li>🥇 Gold & silver rates</li>
+      <li>⚡ Power & water alerts</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-card">
+    <h3>Popular Today</h3>
+    <ul>
+      <li><a routerLink="/chennai-today">Chennai Today</a></li>
+      <li><a routerLink="/bangalore-today">Bangalore Today</a></li>
+      <li><a routerLink="/hyderabad-today">Hyderabad Today</a></li>
+      <li><a routerLink="/mumbai-today">Mumbai Today</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-card">
+    <h3>Quick Updates</h3>
+
+    <ul>
+      <li>
+        <a [routerLink]="['/', activeCity, 'gold-rate']">
+          Gold Rate Today
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/', activeCity, 'petrol-price']">
+          Petrol Price Today
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/', activeCity, 'power-cut']">
+          Power Cut Updates
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+  <!-- ADSENSE: SIDEBAR -->
+  <div class="sidebar-ad">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="3333333333"
+      data-ad-format="auto" data-full-width-responsive="true">
+    </ins>
+  </div>
+</aside>

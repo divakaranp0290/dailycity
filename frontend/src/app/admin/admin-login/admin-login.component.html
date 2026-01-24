@@ -1,0 +1,35 @@
+<section class="login-page">
+
+  <div class="login-container">
+
+    <h1>Admin Login</h1>
+    <p class="login-subtitle">DailyCity Administration</p>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+
+      <div class="form-group">
+        <label for="password">Admin Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          (ngModelChange)="error = false"
+          required
+          autofocus
+          placeholder="Enter admin password" />
+      </div>
+
+      <button type="submit" [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <p *ngIf="error" class="error-msg">
+        Invalid password. Please try again.
+      </p>
+
+    </form>
+
+  </div>
+
+</section>

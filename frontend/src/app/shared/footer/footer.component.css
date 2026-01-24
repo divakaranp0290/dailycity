@@ -1,0 +1,32 @@
+.site-footer {
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.footer-inner a {
+  margin-left: 12px;
+  color: #475569;
+  text-decoration: none;
+}
+
+.footer-inner a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

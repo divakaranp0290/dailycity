@@ -1,0 +1,126 @@
+.admin-container {
+  max-width: 720px;
+  margin: auto;
+  padding: 24px 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.admin-header {
+  margin-bottom: 20px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #0a3d62;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #cfd8dc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #0a3d62;
+  background: #f9fbfd;
+}
+
+.checkbox-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.checkbox-row label {
+  font-weight: 500;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.primary-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #0a3d62;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  padding: 8px 12px;
+  background: #eef2f5;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.secondary-btn:hover {
+  background: #e0e7ee;
+}
+
+.success-msg {
+  margin-top: 16px;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.error-msg,
+.error {
+  color: #c62828;
+  font-size: 13px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 20px 0;
+}

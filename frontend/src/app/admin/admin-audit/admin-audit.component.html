@@ -1,0 +1,54 @@
+<section class="admin-container">
+
+  <div class="admin-header">
+    <h1>Admin Audit Logs</h1>
+    <p class="subtitle">
+      History of admin updates for city daily data.
+    </p>
+  </div>
+
+  <div *ngIf="loading" class="state">
+    Loading audit logs...
+  </div>
+
+  <div *ngIf="error" class="state error">
+    Failed to load audit logs.
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading && logs.length">
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>City</th>
+          <th>Date</th>
+          <th>Updated At</th>
+          <th>IP</th>
+          <th>Payload</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let log of logs; index as i">
+          <td>{{ i + 1 }}</td>
+          <td class="action">{{ log.action }}</td>
+          <td>{{ log.city | titlecase }}</td>
+          <td>{{ log.date }}</td>
+          <td>{{ log.created_at | date:'medium' }}</td>
+          <td>{{ log.ip_address || '-' }}</td>
+          <td>
+            <pre class="payload">
+{{ formatJSON(log.payload) }}
+            </pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!loading && !logs.length" class="state">
+    No audit records found.
+  </p>
+
+</section>

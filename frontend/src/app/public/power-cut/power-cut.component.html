@@ -1,0 +1,87 @@
+<section class="home-wrapper">
+
+  <!-- MAIN CONTENT -->
+  <main class="home-main">
+
+    <h1>Power Cut Today in {{ cityDisplay }}</h1>
+
+    <p class="intro">
+      Get the latest information on power cuts and electricity supply status
+      in {{ cityDisplay }}. This page provides daily updates based on official
+      and local reports.
+    </p>
+
+    <div *ngIf="loading">Loading power cut updates…</div>
+    <div *ngIf="error">Unable to load power cut information.</div>
+
+    <div *ngIf="!loading && !error" class="status-box">
+      <p>
+        <strong>Power Cut Status:</strong>
+        <span *ngIf="powerCut === true">Power cut reported in some areas.</span>
+        <span *ngIf="powerCut === false">No power cut reported today.</span>
+        <span *ngIf="powerCut === null">No official update available.</span>
+      </p>
+
+      <p>
+        <strong>Water Supply:</strong>
+        <span *ngIf="waterIssue === true">Water supply issues reported.</span>
+        <span *ngIf="waterIssue === false">Normal water supply today.</span>
+        <span *ngIf="waterIssue === null">No official update available.</span>
+      </p>
+
+      <p class="updated">
+        Last updated: {{ lastUpdated }}
+      </p>
+    </div>
+
+    <!-- INTERNAL LINK -->
+    <p class="context-link">
+      For full city updates including traffic and fuel prices,
+      visit <a [routerLink]="['/', city + '-today']">{{ cityDisplay }} Today</a>.
+    </p>
+
+    <!-- FAQ SECTION -->
+    <section class="article-block faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>Is there a power cut today in {{ cityDisplay }}?</h3>
+        <p>
+          Power cut information in {{ cityDisplay }} is updated daily based on
+          the latest available electricity board updates.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why do power cuts happen?</h3>
+        <p>
+          Power cuts may occur due to scheduled maintenance, infrastructure
+          upgrades, weather conditions or emergency repairs.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How long do power cuts usually last?</h3>
+        <p>
+          The duration of power cuts depends on the cause and area, ranging from
+          a few minutes to several hours.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does power cut affect water supply?</h3>
+        <p>
+          In some areas, prolonged power outages may impact water supply due to
+          pumping disruptions.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside>
+    <app-sidebar [city]="city"></app-sidebar>
+  </aside>
+
+</section>

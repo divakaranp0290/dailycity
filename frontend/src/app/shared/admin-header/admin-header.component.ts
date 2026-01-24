@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AdminAuthService } from '../../services/admin-auth.service';
 import { AdminStateService } from '../../services/admin-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-header',
@@ -19,7 +20,8 @@ export class AdminHeaderComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private auth: AdminAuthService,
-    private adminState: AdminStateService
+    private adminState: AdminStateService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,5 +51,6 @@ export class AdminHeaderComponent implements OnInit {
 
   logout(): void {
     this.auth.logout();
+    this.router.navigateByUrl('/admin/login');
   }
 }

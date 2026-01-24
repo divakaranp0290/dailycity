@@ -1,19 +1,64 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AdminAuthService {
 
-  private TOKEN_KEY = 'ADMIN_TOKEN';
+  private readonly SESSION_KEY = 'ADMIN_SESSION';
+  private readonly ADMIN_PASSWORD = 'supersecret123';
 
-  constructor(private router: Router) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    this.router.navigate(['/admin/login']);
+  /** 🔐 LOGIN */
+  login(password: string): boolean {
+    if (!isPlatformBrowser(this.platformId)) return false;
+
+    if (password !== this.ADMIN_PASSWORD) {
+      return false;
+    }
+
+    const expiresAt = Date.now() + (30 * 60 * 1000); // 30 minutes
+
+    localStorage.setItem(
+      this.SESSION_KEY,
+      JSON.stringify({
+        token: this.ADMIN_PASSWORD,
+        expiresAt
+      })
+    );
+
+    return true;
   }
 
+  /** ✅ AUTH CHECK */
   isLoggedIn(): boolean {
-    return localStorage.getItem(this.TOKEN_KEY) === 'supersecret123';
+    if (!isPlatformBrowser(this.platformId)) return false;
+
+    const raw = localStorage.getItem(this.SESSION_KEY);
+    if (!raw) return false;
+
+    try {
+      const session = JSON.parse(raw);
+
+      if (session.token !== this.ADMIN_PASSWORD) return false;
+
+      if (Date.now() > session.expiresAt) {
+        this.logout();
+        return false;
+      }
+
+      return true;
+    } catch {
+      this.logout();
+      return false;
+    }
+  }
+
+  /** 🚪 LOGOUT */
+  logout(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    localStorage.removeItem(this.SESSION_KEY);
   }
 }

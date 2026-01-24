@@ -1,0 +1,35 @@
+.layout-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+
+/* LEFT CONTENT */
+.content-panel {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 28px;
+}
+
+/* RIGHT SIDEBAR */
+.right-sidebar {
+  position: sticky;
+  top: 90px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .right-sidebar {
+    position: static;
+  }
+}

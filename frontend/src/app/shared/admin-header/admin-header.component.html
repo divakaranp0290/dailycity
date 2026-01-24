@@ -1,20 +1,21 @@
 <header class="admin-header">
 
-  <div class="left">
-    <strong>DailyCity Admin</strong>
-  </div>
+  <div class="header-inner">
 
-  <div class="center">
-    <label>City:</label>
-    <select [(ngModel)]="selectedCity" (change)="onCityChange()">
-      <option *ngFor="let c of cities" [value]="c">
-        {{ c | titlecase }}
-      </option>
-    </select>
-  </div>
+    <!-- LEFT -->
+    <div class="header-left">
+      <span class="logo">
+        <span class="logo-daily">Daily</span
+        ><span class="logo-city">City</span>
+      </span>
+      <span class="admin-badge">Admin</span>
+    </div>
 
-  <div class="right">
-    <button (click)="logout()">Logout</button>
+    <!-- RIGHT -->
+    <div class="header-right">
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+
   </div>
 
 </header>

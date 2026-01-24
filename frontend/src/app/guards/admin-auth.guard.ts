@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { AdminAuthService } from '../services/admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthGuard implements CanActivate {
-  constructor(private router: Router) {}
- canActivate(): boolean {
 
-    // TEMP SIMPLE CHECK (same token you use in AdminService)
-    const adminToken = localStorage.getItem('ADMIN_TOKEN');
+  constructor(
+    private auth: AdminAuthService,
+    private router: Router
+  ) {}
 
-    if (adminToken === 'supersecret123') {
+  canActivate(): boolean {
+    if (this.auth.isLoggedIn()) {
       return true;
     }
 
-    // Not authorized → redirect
-    this.router.navigate(['/chennai']);
+    this.router.navigate(['/admin/login']);
     return false;
   }
-  
 }

@@ -1,0 +1,94 @@
+<!-- ===============================
+     NEWS LAYOUT WRAPPER
+================================ -->
+<div class="news-layout">
+
+  <!-- ===============================
+       MAIN CONTENT (70%)
+  ================================ -->
+  <main class="news-main">
+
+    <article class="news-article" *ngIf="!loading && !error">
+
+      <!-- HEADLINE -->
+      <header class="article-header">
+        <h1>
+          Today in {{ cityDisplay }}: Traffic, Power Cut, Panchang & City Updates
+        </h1>
+
+        <p class="article-dek">
+          Latest daily updates from {{ cityDisplay }} including traffic conditions,
+          power cut status, water supply updates, Panchang timings and essential city information.
+        </p>
+
+        <div class="article-meta">
+          <span>{{ cityDisplay }}</span>
+          <span>•</span>
+          <time>{{ date }}</time>
+        </div>
+
+        <div class="last-updated" *ngIf="lastUpdated">
+          Last updated: {{ lastUpdated }}
+        </div>
+      </header>
+
+      <!-- AUTHOR -->
+      <div class="author-box">
+        <span class="author-label">Written by</span>
+        <span class="author-name">{{ authorName }}</span>
+        <p class="author-desc">{{ authorDescription }}</p>
+      </div>
+
+      <!-- INTRO -->
+      <section class="article-intro">
+        <p>
+          {{ cityDisplay }} is one of India’s major urban centres with a fast-paced
+          daily life. Residents depend on accurate city updates to plan travel,
+          work schedules, and household activities.
+        </p>
+      </section>
+
+      <!-- TODAY SPECIAL -->
+      <section class="article-block highlight" *ngIf="todaySpecial">
+        <h2>Today’s Special Update</h2>
+        <p>{{ todaySpecial }}</p>
+      </section>
+
+      <!-- CITY STATUS -->
+      <section class="article-block">
+        <h2>City Status Today</h2>
+        <ul class="status-list">
+          <li><strong>Traffic:</strong> {{ traffic || 'Normal traffic reported.' }}</li>
+          <li><strong>Power Cut:</strong>
+            {{ power_cut ? 'Power cut reported.' : 'No power cut today.' }}
+          </li>
+          <li><strong>Water Supply:</strong>
+            {{ water_issue ? 'Issues reported.' : 'Normal water supply.' }}
+          </li>
+        </ul>
+      </section>
+
+      <!-- PANCHANG -->
+      <section class="article-block">
+        <h2>Today’s Panchang</h2>
+        <ul class="astro-list">
+          <li><strong>Sunrise:</strong> {{ sunrise || '-' }}</li>
+          <li><strong>Sunset:</strong> {{ sunset || '-' }}</li>
+          <li><strong>Tithi:</strong> {{ tithi || '-' }}</li>
+          <li><strong>Rahu Kalam:</strong> {{ rahu_kalam || '-' }}</li>
+          <li><strong>Yamagandam:</strong> {{ yamagandam || '-' }}</li>
+        </ul>
+      </section>
+
+    </article>
+
+    <!-- STATES -->
+    <div *ngIf="loading" class="loading">Loading today’s city updates…</div>
+    <div *ngIf="error" class="error">Unable to load today’s updates.</div>
+
+  </main>
+
+   <!-- SIDEBAR (30%) -->
+   <app-sidebar [city]="city"></app-sidebar>
+
+</div>

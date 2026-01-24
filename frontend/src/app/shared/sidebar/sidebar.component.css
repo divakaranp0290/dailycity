@@ -1,0 +1,51 @@
+/* ======================================================
+   SIDEBAR (NEWS STYLE)
+====================================================== */
+.news-sidebar {
+  position: sticky;
+  top: 88px;
+}
+
+.sidebar-card {
+  width: 85%;
+  background: #f7f7f7;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-left: 3px solid #0a3d62;
+}
+
+.sidebar-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sidebar-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-card ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar-card ul li a {
+  font-size: 14px;
+  color: #0a3d62;
+  text-decoration: none;
+}
+
+.sidebar-card ul li a:hover {
+  text-decoration: underline;
+}
+/* MOBILE */
+@media (max-width: 900px) {
+  .home-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .home-sidebar {
+    order: -1;
+  }
+}

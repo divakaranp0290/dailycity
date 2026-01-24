@@ -1,0 +1,31 @@
+<header class="news-header">
+  <div class="header-inner">
+
+    <!-- LEFT: LOGO -->
+    <div class="header-left">
+      <a routerLink="/" class="site-logo">
+        Daily<span>City</span>
+      </a>
+    </div>
+
+    <!-- CENTER: CITY SELECTOR -->
+    <div class="header-center">
+      <select
+        class="city-selector"
+        (change)="onCityChange($event)">
+        <option value="">Select City</option>
+        <option *ngFor="let c of cities" [value]="c.slug">
+          {{ c.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- RIGHT: NAV -->
+    <nav class="header-right">
+      <a routerLink="/about">About</a>
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="/privacy-policy">Privacy Policy</a>
+    </nav>
+
+  </div>
+</header>

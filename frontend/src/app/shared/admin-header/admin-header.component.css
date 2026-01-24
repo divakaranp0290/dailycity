@@ -1,22 +1,57 @@
 .admin-header {
+  background: linear-gradient(90deg, #0b1736, #0a2540);
+  padding: 14px 0;
+  margin-bottom: 20px;
+}
+
+/* same width as public site */
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 16px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #ddd;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-.center {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* LOGO */
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
-select {
-  padding: 4px;
+.logo-daily {
+  color: #ffffff; /* white */
 }
 
-button {
-  padding: 6px 10px;
+.logo-city {
+  color: #4da3ff; /* DailyCity blue */
+}
+
+/* ADMIN BADGE */
+.admin-badge {
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* RIGHT */
+.logout-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
