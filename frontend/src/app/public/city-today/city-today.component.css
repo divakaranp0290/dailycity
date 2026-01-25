@@ -216,3 +216,11 @@ html, body {
     font-size: 19px;
   }
 }
+
+.finance-links{
+  padding: 16px;
+}
+
+.finance-links li{
+  margin-bottom: 8px;
+}
