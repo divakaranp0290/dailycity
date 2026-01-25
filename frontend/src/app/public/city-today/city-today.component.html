@@ -47,31 +47,30 @@
       <!-- ARTICLE INTRO -->
       <section class="article-intro">
         <p>
-          {{ city | titlecase }} is one of India’s major urban centres with a fast-paced
-          daily life. Residents depend on accurate city updates to plan travel,
-          work schedules, and household activities.
+          Chennai, the capital of Tamil Nadu, is known for its busy road networks,
+          coastal weather conditions, and active industrial zones. Daily life in
+          the city is influenced by traffic congestion during peak hours, periodic
+          power maintenance schedules, and weather-related disruptions.
         </p>
 
         <p>
-          This report brings together today’s key information for {{ city | titlecase }},
-          including traffic conditions, power cut alerts, water supply updates and
-          Panchang details such as sunrise, sunset, Rahu Kalam and Yamagandam.
+          Residents across areas such as T. Nagar, Velachery, Anna Nagar and OMR
+          often rely on daily city updates to plan commuting, office schedules,
+          and household activities. Monitoring traffic flow, electricity status,
+          fuel prices and Panchang timings helps citizens stay prepared.
         </p>
       </section>
 
+
       <!-- ADSENSE #1 -->
       <div class="ad-slot ad-inarticle">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-XXXX"
-             data-ad-slot="1111111111"
-             data-ad-format="fluid"
-             data-ad-layout="in-article">
+        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-client="ca-pub-XXXX"
+          data-ad-slot="1111111111" data-ad-format="fluid" data-ad-layout="in-article">
         </ins>
       </div>
 
       <!-- TODAY SPECIAL -->
-      <section class="article-block highlight" *ngIf="todaySpecial">
+      <section class="article-block" *ngIf="todaySpecial">
         <h2>Today’s Special Update</h2>
         <p>{{ todaySpecial }}</p>
       </section>
@@ -83,16 +82,16 @@
           <li><strong>Traffic:</strong> {{ traffic || 'Normal traffic reported across most areas.' }}</li>
           <li><strong>Power Cut:</strong>
             {{
-              power_cut === true ? 'Power cut reported in some areas.'
-              : power_cut === false ? 'No power cut reported today.'
-              : 'No official update available.'
+            power_cut === true ? 'Power cut reported in some areas.'
+            : power_cut === false ? 'No power cut reported today.'
+            : 'No official update available.'
             }}
           </li>
           <li><strong>Water Supply:</strong>
             {{
-              water_issue === true ? 'Water supply issues reported in some localities.'
-              : water_issue === false ? 'Normal water supply today.'
-              : 'No official update available.'
+            water_issue === true ? 'Water supply issues reported in some localities.'
+            : water_issue === false ? 'Normal water supply today.'
+            : 'No official update available.'
             }}
           </li>
         </ul>
@@ -100,12 +99,8 @@
 
       <!-- ADSENSE #2 -->
       <div class="ad-slot ad-inarticle">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-XXXX"
-             data-ad-slot="2222222222"
-             data-ad-format="fluid"
-             data-ad-layout="in-article">
+        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-client="ca-pub-XXXX"
+          data-ad-slot="2222222222" data-ad-format="fluid" data-ad-layout="in-article">
         </ins>
       </div>
 
@@ -126,7 +121,8 @@
         <h2>Today’s Prices in {{ city | titlecase }}</h2>
         <ul class="finance-links">
           <li><a [routerLink]="['/', city, 'gold-rate']">Gold Rate Today in {{ city | titlecase }}</a></li>
-          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol and Diesel Price Today in {{ city | titlecase }}</a></li>
+          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol and Diesel Price Today in {{ city | titlecase }}</a>
+          </li>
         </ul>
       </section>
 
@@ -172,14 +168,10 @@
   <aside class="news-sidebar">
 
     <app-sidebar [city]="city"></app-sidebar>
-  
+
     <div class="sidebar-card ad-box">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXX"
-           data-ad-slot="3333333333"
-           data-ad-format="auto"
-           data-full-width-responsive="true">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="3333333333"
+        data-ad-format="auto" data-full-width-responsive="true">
       </ins>
     </div>
 

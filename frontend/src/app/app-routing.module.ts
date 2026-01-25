@@ -19,6 +19,7 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { PetrolPriceComponent } from './public/petrol-price/petrol-price.component';
 import { GoldPriceComponent } from './public/gold-price/gold-price.component';
 import { PowerCutComponent } from './public/power-cut/power-cut.component';
+import { TermsAndConditionsComponent } from './public/static/terms-condiitons/terms-conditions.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,8 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+  
 
       /* ===============================
          CITY SUB PAGES

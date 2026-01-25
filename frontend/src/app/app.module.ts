@@ -22,6 +22,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { GoldPriceComponent } from './public/gold-price/gold-price.component';
 import { PetrolPriceComponent } from './public/petrol-price/petrol-price.component';
 import { PowerCutComponent } from './public/power-cut/power-cut.component';
+import { TermsAndConditionsComponent } from './public/static/terms-condiitons/terms-conditions.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PowerCutComponent } from './public/power-cut/power-cut.component';
     AdminHeaderComponent,
     AboutComponent,
     PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
     ContactComponent,
     FooterComponent,
     SidebarComponent,

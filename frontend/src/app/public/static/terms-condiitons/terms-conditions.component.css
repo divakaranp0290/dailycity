@@ -1,0 +1,21 @@
+.page {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 25px;
+}
+
+p {
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
