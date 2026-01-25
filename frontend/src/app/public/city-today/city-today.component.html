@@ -8,21 +8,22 @@
   ================================ -->
   <main class="news-main">
 
+    <!-- 🔴 ARTICLE (UNCHANGED CONTENT) -->
     <article class="news-article" *ngIf="!loading && !error">
 
       <!-- HEADLINE -->
       <header class="article-header">
         <h1>
-          Today in {{ cityDisplay }}: Traffic, Power Cut, Panchang & City Updates
+          Today in {{ city | titlecase }}: Traffic, Power Cut, Panchang & City Updates
         </h1>
 
         <p class="article-dek">
-          Latest daily updates from {{ cityDisplay }} including traffic conditions,
+          Latest daily updates from {{ city | titlecase }} including traffic conditions,
           power cut status, water supply updates, Panchang timings and essential city information.
         </p>
 
         <div class="article-meta">
-          <span>{{ cityDisplay }}</span>
+          <span>{{ city | titlecase }}</span>
           <span>•</span>
           <time>{{ date }}</time>
         </div>
@@ -32,21 +33,42 @@
         </div>
       </header>
 
-      <!-- AUTHOR -->
+      <!-- AUTHOR BOX -->
       <div class="author-box">
-        <span class="author-label">Written by</span>
-        <span class="author-name">{{ authorName }}</span>
-        <p class="author-desc">{{ authorDescription }}</p>
+        <div class="author-text">
+          <span class="author-label">Written by</span>
+          <span class="author-name">{{ authorName }}</span>
+          <p class="author-desc">
+            {{ authorDescription }}
+          </p>
+        </div>
       </div>
 
-      <!-- INTRO -->
+      <!-- ARTICLE INTRO -->
       <section class="article-intro">
         <p>
-          {{ cityDisplay }} is one of India’s major urban centres with a fast-paced
+          {{ city | titlecase }} is one of India’s major urban centres with a fast-paced
           daily life. Residents depend on accurate city updates to plan travel,
           work schedules, and household activities.
         </p>
+
+        <p>
+          This report brings together today’s key information for {{ city | titlecase }},
+          including traffic conditions, power cut alerts, water supply updates and
+          Panchang details such as sunrise, sunset, Rahu Kalam and Yamagandam.
+        </p>
       </section>
+
+      <!-- ADSENSE #1 -->
+      <div class="ad-slot ad-inarticle">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-XXXX"
+             data-ad-slot="1111111111"
+             data-ad-format="fluid"
+             data-ad-layout="in-article">
+        </ins>
+      </div>
 
       <!-- TODAY SPECIAL -->
       <section class="article-block highlight" *ngIf="todaySpecial">
@@ -58,25 +80,81 @@
       <section class="article-block">
         <h2>City Status Today</h2>
         <ul class="status-list">
-          <li><strong>Traffic:</strong> {{ traffic || 'Normal traffic reported.' }}</li>
+          <li><strong>Traffic:</strong> {{ traffic || 'Normal traffic reported across most areas.' }}</li>
           <li><strong>Power Cut:</strong>
-            {{ power_cut ? 'Power cut reported.' : 'No power cut today.' }}
+            {{
+              power_cut === true ? 'Power cut reported in some areas.'
+              : power_cut === false ? 'No power cut reported today.'
+              : 'No official update available.'
+            }}
           </li>
           <li><strong>Water Supply:</strong>
-            {{ water_issue ? 'Issues reported.' : 'Normal water supply.' }}
+            {{
+              water_issue === true ? 'Water supply issues reported in some localities.'
+              : water_issue === false ? 'Normal water supply today.'
+              : 'No official update available.'
+            }}
           </li>
         </ul>
       </section>
 
+      <!-- ADSENSE #2 -->
+      <div class="ad-slot ad-inarticle">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-XXXX"
+             data-ad-slot="2222222222"
+             data-ad-format="fluid"
+             data-ad-layout="in-article">
+        </ins>
+      </div>
+
       <!-- PANCHANG -->
       <section class="article-block">
-        <h2>Today’s Panchang</h2>
+        <h2>Today’s Panchang in {{ city | titlecase }}</h2>
         <ul class="astro-list">
           <li><strong>Sunrise:</strong> {{ sunrise || '-' }}</li>
           <li><strong>Sunset:</strong> {{ sunset || '-' }}</li>
           <li><strong>Tithi:</strong> {{ tithi || '-' }}</li>
           <li><strong>Rahu Kalam:</strong> {{ rahu_kalam || '-' }}</li>
           <li><strong>Yamagandam:</strong> {{ yamagandam || '-' }}</li>
+        </ul>
+      </section>
+
+      <!-- PRICE LINKS -->
+      <section class="article-block">
+        <h2>Today’s Prices in {{ city | titlecase }}</h2>
+        <ul class="finance-links">
+          <li><a [routerLink]="['/', city, 'gold-rate']">Gold Rate Today in {{ city | titlecase }}</a></li>
+          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol and Diesel Price Today in {{ city | titlecase }}</a></li>
+        </ul>
+      </section>
+
+      <!-- FAQ -->
+      <section class="article-block faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>Is there a power cut today in {{ city | titlecase }}?</h3>
+          <p>Power cut information is based on the latest available updates.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How accurate is the traffic information?</h3>
+          <p>Traffic updates reflect current reports and general city conditions.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Why are Panchang timings included?</h3>
+          <p>Panchang timings are followed by many households for daily planning.</p>
+        </div>
+      </section>
+
+      <!-- INTERNAL LINKS -->
+      <section class="article-block internal-links">
+        <h2>More from DailyCity</h2>
+        <ul>
+          <li><a [routerLink]="['/', city, 'gold-rate']">Gold Rate Today</a></li>
+          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol Price Today</a></li>
+          <li><a routerLink="/about">About DailyCity</a></li>
+          <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
         </ul>
       </section>
 
@@ -88,7 +166,23 @@
 
   </main>
 
-   <!-- SIDEBAR (30%) -->
-   <app-sidebar [city]="city"></app-sidebar>
+  <!-- ===============================
+       SIDEBAR (30%)
+  ================================ -->
+  <aside class="news-sidebar">
+
+    <app-sidebar [city]="city"></app-sidebar>
+  
+    <div class="sidebar-card ad-box">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXX"
+           data-ad-slot="3333333333"
+           data-ad-format="auto"
+           data-full-width-responsive="true">
+      </ins>
+    </div>
+
+  </aside>
 
 </div>

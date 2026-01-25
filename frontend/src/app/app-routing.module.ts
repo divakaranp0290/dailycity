@@ -22,27 +22,43 @@ import { PowerCutComponent } from './public/power-cut/power-cut.component';
 
 const routes: Routes = [
   {
-  path: '',
-  component: PublicLayoutComponent,
-  children: [
-    { path: '', component: HomeComponent },
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
 
-    /* STATIC PAGES FIRST */
-    { path: 'about', component: AboutComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'privacy-policy', component: PrivacyPolicyComponent },
+      /* ===============================
+         HOME
+      ================================ */
+      { path: '', component: HomeComponent },
 
-    /* CITY SUB PAGES */
-    { path: ':city/gold-rate', component: GoldPriceComponent },
-    { path: ':city/petrol-price', component: PetrolPriceComponent },
-    { path: ':city/power-cut', component: PowerCutComponent },
+      /* ===============================
+         STATIC PAGES (FIRST)
+      ================================ */
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'privacy-policy', component: PrivacyPolicyComponent },
 
+      /* ===============================
+         CITY SUB PAGES
+         /chennai/gold-rate
+         /chennai/petrol-price
+         /chennai/power-cut
+      ================================ */
+      { path: ':city/gold-rate', component: GoldPriceComponent },
+      { path: ':city/petrol-price', component: PetrolPriceComponent },
+      { path: ':city/power-cut', component: PowerCutComponent },
 
-    /* CITY TODAY (KEEP LAST) */
-    { path: ':city-today', component: CityTodayComponent },
-  ]
-},
+      /* ===============================
+         CITY TODAY PAGE (MUST BE LAST)
+         /chennai-today
+      ================================ */
+      { path: ':city-today', component: CityTodayComponent }
+    ]
+  },
 
+  /* ===============================
+     ADMIN ROUTES
+  ================================ */
   {
     path: 'admin',
     component: AdminLayoutComponent,
@@ -60,6 +76,10 @@ const routes: Routes = [
       }
     ]
   },
+
+  /* ===============================
+     FALLBACK
+  ================================ */
   { path: '**', redirectTo: '' }
 ];
 
