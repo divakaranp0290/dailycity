@@ -46,7 +46,8 @@ export async function upsertCityToday(req: Request, res: Response) {
     // 🔐 Normalize + trust service for casting
     const payload = {
       ...req.body,
-      city: city.toLowerCase().trim()
+      city: city.toLowerCase().trim(),
+      date: new Date(req.body.date).toISOString().split('T')[0]
     };
     console.log('REQ BODY:', req.body);
     const result = await CityService.upsertToday(payload);

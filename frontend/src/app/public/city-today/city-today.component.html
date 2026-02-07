@@ -71,31 +71,64 @@
 
       <!-- TODAY SPECIAL -->
       <section class="article-block" *ngIf="todaySpecial">
-        <h2>Today’s Special Update</h2>
-        <p>{{ todaySpecial }}</p>
+         <div *ngIf="todaySpecial && todaySpecial.trim().length">
+        
+          <h2>Today’s Special Update</h2>
+        
+          <ul class="bullet-list">
+            <li *ngFor="let item of formatBulletText(todaySpecial)">
+              {{ item }}
+            </li>
+          </ul>
+        
+        </div>
+
       </section>
 
-      <!-- CITY STATUS -->
-      <section class="article-block">
-        <h2>City Status Today</h2>
-        <ul class="status-list">
-          <li><strong>Traffic:</strong> {{ traffic || 'Normal traffic reported across most areas.' }}</li>
-          <li><strong>Power Cut:</strong>
-            {{
-            power_cut === true ? 'Power cut reported in some areas.'
-            : power_cut === false ? 'No power cut reported today.'
-            : 'No official update available.'
-            }}
-          </li>
-          <li><strong>Water Supply:</strong>
-            {{
-            water_issue === true ? 'Water supply issues reported in some localities.'
-            : water_issue === false ? 'Normal water supply today.'
-            : 'No official update available.'
-            }}
-          </li>
-        </ul>
-      </section>
+    
+     <!-- CITY STATUS -->
+    <section class="article-block">
+      <h2>City Status Today</h2>
+        <!-- TRAFFIC -->
+         <div *ngIf="traffic && traffic.trim().length">
+        
+          <h2>Traffic</h2>
+        
+          <ul class="bullet-list">
+            <li *ngFor="let item of formatBulletText(traffic)">
+              {{ item }}
+            </li>
+          </ul>
+        
+        </div>
+
+        <!-- POWER CUT -->
+        <div  *ngIf="power_cut && power_cut.trim().length">
+        
+          <h2>Power Cut</h2>
+        
+          <ul class="bullet-list">
+            <li *ngFor="let item of formatBulletText(power_cut)">
+              {{ item }}
+            </li>
+          </ul>
+        
+        </div>
+
+         <!-- WATER SUPPLY -->
+        <div *ngIf="water_issue && water_issue.trim().length">
+        
+          <h2>Water Supply</h2>
+        
+          <ul class="bullet-list">
+            <li *ngFor="let item of formatBulletText(water_issue)">
+              {{ item }}
+            </li>
+          </ul>
+        
+        </div>
+    </section>
+
 
       <!-- ADSENSE #2 -->
       <div class="ad-slot ad-inarticle">

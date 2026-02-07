@@ -1,5 +1,6 @@
 <section class="admin-container">
 
+  <!-- HEADER -->
   <header class="admin-header">
     <h1>Update City Daily Data</h1>
     <p class="subtitle">Manage daily information for selected city</p>
@@ -7,45 +8,53 @@
 
   <form #adminForm="ngForm" (ngSubmit)="submit(adminForm)">
 
-    <!-- CITY -->
-    <div class="form-group">
-      <label>City *</label>
-      <select name="city" [(ngModel)]="city" required>
-        <option *ngFor="let c of cities" [value]="c">
-          {{ c | titlecase }}
-        </option>
-      </select>
+    <!-- CITY + DATE -->
+    <div class="form-grid">
+      <div class="form-group">
+        <label>City *</label>
+        <select name="city" [(ngModel)]="city" required>
+          <option *ngFor="let c of cities" [value]="c">
+            {{ c | titlecase }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Date *</label>
+        <input type="date" name="date" [(ngModel)]="date" required />
+      </div>
     </div>
 
-    <div class="button-row">
-      <button type="button" class="secondary-btn" (click)="autoFillTodayData()">
-        Load Today’s Data
-      </button>
-      <button type="button" class="secondary-btn" (click)="copyYesterday()">
-        Copy Yesterday
-      </button>
-    </div>
+    <!-- ACTION BUTTONS -->
+    <div class="form-grid">
+      <div class="form-group">
+        <button type="button"
+                class="secondary-btn"
+                (click)="autoFillTodayData()">
+          Load Today’s Data
+        </button>
+      </div>
 
-    <!-- DATE -->
-    <div class="form-group">
-      <label>Date *</label>
-      <input type="date" name="date" [(ngModel)]="date" required #dateCtrl="ngModel" />
-      <small class="error" *ngIf="dateCtrl.invalid && dateCtrl.touched">
-        Date is required
-      </small>
+      <div class="form-group">
+        <button type="button"
+                class="secondary-btn"
+                (click)="copyYesterday()">
+          Copy Yesterday
+        </button>
+      </div>
     </div>
 
     <!-- TODAY SPECIAL -->
-    <div class="form-group">
+    <div class="form-group full-width">
       <label>Today Special</label>
       <textarea
         name="today_special"
         [(ngModel)]="today_special"
-        rows="3"
-        maxlength="500"
+        rows="5"
+        maxlength="3000"
         placeholder="Important updates, events, notices…">
       </textarea>
-      <small class="hint">Max 500 characters</small>
+      <small class="hint">Max 3000 characters</small>
     </div>
 
     <hr />
@@ -53,7 +62,7 @@
     <!-- PRICES -->
     <div class="section-title">Fuel & Metal Prices</div>
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
         <label>Petrol (₹)</label>
         <input type="number" name="petrol" [(ngModel)]="petrol" step="0.01" />
@@ -65,7 +74,7 @@
       </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
         <label>Silver (₹ / g)</label>
         <input type="number" name="silver" [(ngModel)]="silver" step="0.01" />
@@ -82,21 +91,34 @@
     <!-- UTILITIES -->
     <div class="section-title">Utilities & Status</div>
 
-    <div class="form-group">
-      <label>Traffic Status</label>
-      <input type="text" name="traffic" [(ngModel)]="traffic" placeholder="Heavy / Moderate / Smooth" />
+    <div class="form-group full-width">
+      <label>Traffic Update</label>
+      <textarea
+        name="traffic"
+        [(ngModel)]="traffic"
+        rows="3"
+        placeholder="Example: Heavy traffic in OMR and Anna Salai during peak hours.">
+      </textarea>
     </div>
 
-    <div class="checkbox-row">
-      <label>
-        <input type="checkbox" name="power_cut" [(ngModel)]="power_cut" />
-        Power Cut Today
-      </label>
+    <div class="form-group full-width">
+      <label>Power Cut Details</label>
+      <textarea
+        name="power_cut"
+        [(ngModel)]="power_cut"
+        rows="3"
+        placeholder="Example: Power shutdown in T Nagar from 9 AM to 2 PM.">
+      </textarea>
+    </div>
 
-      <label>
-        <input type="checkbox" name="water_issue" [(ngModel)]="water_issue" />
-        Water Supply Issue
-      </label>
+    <div class="form-group full-width">
+      <label>Water Supply Update</label>
+      <textarea
+        name="water_issue"
+        [(ngModel)]="water_issue"
+        rows="3"
+        placeholder="Example: Low water pressure expected in Velachery area.">
+      </textarea>
     </div>
 
     <hr />
@@ -104,24 +126,24 @@
     <!-- CALENDAR -->
     <div class="section-title">Calendar & Panchangam</div>
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
         <label>Sunrise</label>
-        <input type="text" name="sunrise" [(ngModel)]="sunrise" placeholder="06:32 AM" />
+        <input type="text" name="sunrise" [(ngModel)]="sunrise" />
       </div>
 
       <div class="form-group">
         <label>Sunset</label>
-        <input type="text" name="sunset" [(ngModel)]="sunset" placeholder="06:01 PM" />
+        <input type="text" name="sunset" [(ngModel)]="sunset" />
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group full-width">
       <label>Tithi</label>
       <input type="text" name="tithi" [(ngModel)]="tithi" />
     </div>
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
         <label>Rahu Kalam</label>
         <input type="text" name="rahu_kalam" [(ngModel)]="rahu_kalam" />
@@ -134,7 +156,9 @@
     </div>
 
     <!-- SUBMIT -->
-    <button type="submit" class="primary-btn" [disabled]="adminForm.invalid || loading">
+    <button type="submit"
+            class="primary-btn"
+            [disabled]="adminForm.invalid || loading">
       {{ loading ? 'Saving…' : 'Save Data' }}
     </button>
 

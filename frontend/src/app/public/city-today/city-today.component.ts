@@ -23,8 +23,9 @@ export class CityTodayComponent implements OnInit {
 
   todaySpecial: string | null = null;
   traffic: string | null = null;
-  power_cut: boolean | null = null;
-  water_issue: boolean | null = null;
+  power_cut: string | null = null;
+  water_issue: string | null = null;
+
 
   petrol: number | null = null;
   gold_22k: number | null = null;
@@ -203,4 +204,12 @@ export class CityTodayComponent implements OnInit {
     script.text = JSON.stringify(schema);
     document.head.appendChild(script);
   }
+
+  formatBulletText(text: string | null): string[] {
+  if (!text) return [];
+  return text
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+}
 }

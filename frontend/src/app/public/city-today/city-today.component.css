@@ -224,3 +224,30 @@ html, body {
 .finance-links li{
   margin-bottom: 8px;
 }
+
+.alert-box {
+  background: #f9fafb;
+  border-left: 4px solid #ccc;
+  padding: 14px 16px;
+  margin-top: 12px;
+  border-radius: 6px;
+}
+
+.power-alert {
+  border-left-color: #f59e0b;
+}
+
+.water-alert {
+  border-left-color: #0ea5e9;
+}
+
+.bullet-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.bullet-list li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
