@@ -50,7 +50,7 @@ export class CityTodayComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-    const slug = params.get('city-today'); 
+    const slug = params.get('slug');
 
     if (!slug) {
       this.error = true;
@@ -69,6 +69,7 @@ export class CityTodayComponent implements OnInit {
 
       this.setSEO();
       this.setBreadcrumbSchema();
+      this.setFAQSchema();
       this.setArticleSchema();
       this.loadTodayData();
     });
@@ -136,8 +137,8 @@ export class CityTodayComponent implements OnInit {
   setSEO(): void {
     const name = this.formatCity(this.city);
     this.seo.setSEO(
-      `Today in ${name} – Traffic, Power Cut, Panchang | DailyCity`,
-      `Get today’s updates in ${name} including traffic, power cut, fuel prices and Panchang details.`
+      `${name} Today (${this.date}): Traffic, Power Cut, Gold Rate, Rahu Kalam`,
+      `Check ${name} today updates including live traffic, power cut schedule, water supply, gold rate, sunrise, sunset, rahu kalam and yamagandam.`
     );
   }
 
@@ -155,7 +156,8 @@ export class CityTodayComponent implements OnInit {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const name = this.formatCity(this.city);
-    const url = `https://dailycity.in/${this.city}-today`;
+    const url = `https://www.dailycity.in/${this.city}-today`;
+
 
     const schema = {
       "@context": "https://schema.org",
@@ -204,6 +206,41 @@ export class CityTodayComponent implements OnInit {
     script.text = JSON.stringify(schema);
     document.head.appendChild(script);
   }
+
+  setFAQSchema(): void {
+  if (!isPlatformBrowser(this.platformId)) return;
+
+  const name = this.formatCity(this.city);
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Is there a power cut today in ${name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Power cut details are updated daily based on official and local reports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `How accurate is traffic information in ${name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traffic updates are based on the latest available city reports and general traffic patterns."
+        }
+      }
+    ]
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.text = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
 
   formatBulletText(text: string | null): string[] {
   if (!text) return [];

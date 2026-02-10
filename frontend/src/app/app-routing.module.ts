@@ -55,7 +55,7 @@ const routes: Routes = [
          CITY TODAY PAGE (MUST BE LAST)
          /chennai-today
       ================================ */
-      { path: ':city-today', component: CityTodayComponent }
+      { path: ':slug', component: CityTodayComponent }
     ]
   },
 

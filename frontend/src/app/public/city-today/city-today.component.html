@@ -14,7 +14,7 @@
       <!-- HEADLINE -->
       <header class="article-header">
         <h1>
-          Today in {{ city | titlecase }}: Traffic, Power Cut, Panchang & City Updates
+          {{ city | titlecase }} Today – {{ date }} | Traffic, Power Cut & City Updates
         </h1>
 
         <p class="article-dek">
@@ -47,10 +47,8 @@
       <!-- ARTICLE INTRO -->
       <section class="article-intro">
         <p>
-          Chennai, the capital of Tamil Nadu, is known for its busy road networks,
-          coastal weather conditions, and active industrial zones. Daily life in
-          the city is influenced by traffic congestion during peak hours, periodic
-          power maintenance schedules, and weather-related disruptions.
+          {{ city | titlecase }} is a major city where daily life is influenced by traffic conditions,
+          power maintenance schedules, fuel prices and local civic updates.
         </p>
 
         <p>
@@ -71,63 +69,63 @@
 
       <!-- TODAY SPECIAL -->
       <section class="article-block" *ngIf="todaySpecial">
-         <div *ngIf="todaySpecial && todaySpecial.trim().length">
-        
+        <div *ngIf="todaySpecial && todaySpecial.trim().length">
+
           <h2>Today’s Special Update</h2>
-        
+
           <ul class="bullet-list">
             <li *ngFor="let item of formatBulletText(todaySpecial)">
               {{ item }}
             </li>
           </ul>
-        
+
         </div>
 
       </section>
 
-    
-     <!-- CITY STATUS -->
-    <section class="article-block">
-      <h2>City Status Today</h2>
+
+      <!-- CITY STATUS -->
+      <section class="article-block">
+        <h2>City Status Today</h2>
         <!-- TRAFFIC -->
-         <div *ngIf="traffic && traffic.trim().length">
-        
-          <h2>Traffic</h2>
-        
+        <div *ngIf="traffic && traffic.trim().length">
+
+          <h3>Traffic Today in {{ city | titlecase }}</h3>
+
           <ul class="bullet-list">
             <li *ngFor="let item of formatBulletText(traffic)">
               {{ item }}
             </li>
           </ul>
-        
+
         </div>
 
         <!-- POWER CUT -->
-        <div  *ngIf="power_cut && power_cut.trim().length">
-        
-          <h2>Power Cut</h2>
-        
+        <div *ngIf="power_cut && power_cut.trim().length">
+
+          <h3>Power Cut Today in {{ city | titlecase }}</h3>
+
           <ul class="bullet-list">
             <li *ngFor="let item of formatBulletText(power_cut)">
               {{ item }}
             </li>
           </ul>
-        
+
         </div>
 
-         <!-- WATER SUPPLY -->
+        <!-- WATER SUPPLY -->
         <div *ngIf="water_issue && water_issue.trim().length">
-        
-          <h2>Water Supply</h2>
-        
+
+          <h3>Water Supply Today in {{ city | titlecase }}</h3>
+
           <ul class="bullet-list">
             <li *ngFor="let item of formatBulletText(water_issue)">
               {{ item }}
             </li>
           </ul>
-        
+
         </div>
-    </section>
+      </section>
 
 
       <!-- ADSENSE #2 -->
@@ -180,8 +178,10 @@
       <section class="article-block internal-links">
         <h2>More from DailyCity</h2>
         <ul>
-          <li><a [routerLink]="['/', city, 'gold-rate']">Gold Rate Today</a></li>
-          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol Price Today</a></li>
+          <li><a [routerLink]="['/', city, 'gold-rate']">
+              Gold Rate Today in {{ city | titlecase }}
+            </a></li>
+          <li><a [routerLink]="['/', city, 'petrol-price']">Petrol Price Today in {{ city | titlecase }}</a></li>
           <li><a routerLink="/about">About DailyCity</a></li>
           <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
         </ul>
